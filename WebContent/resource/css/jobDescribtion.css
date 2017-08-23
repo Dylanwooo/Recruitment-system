@@ -1,0 +1,28 @@
+@CHARSET "UTF-8";
+
+body{
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding:0;
+}
+#outsideContent{
+	width:100%;
+	height:650px;
+	top:20px;
+	position:relative;
+	background-color:#f5f7fa;
+}
+#mainContainer{
+	position:relative;
+	top:30px;
+	width:1000px;
+	min-height:500px;
+	margin: 0 auto;	
+	border:1px solid white;
+	background-color:white;
+	box-shadow:0 0 5px #c0c0c0 ;
+}
+#headTitle{
+	position:relative;
+}

@@ -1,0 +1,97 @@
+@CHARSET "UTF-8";
+
+body{
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding:0;
+}
+#outsideContent{
+	width:100%;
+	height:800px;
+	top:20px;
+	position:relative;
+	background-color:#f5f7fa;
+}
+#mainContainer{
+	position:relative;
+	width:1100px;
+	height:700px;
+	margin: 0 auto;	
+	text-align:center;
+}
+#myTab{
+	position:absolute;
+	top: 20px;
+	left: 50px;
+}
+#rightContent{	
+	position:absolute;
+	top:40px;
+	left:20px;	
+	width: 1060px;
+	height: 240px;
+	margin:0 auto;
+	border:1px solid black;
+	background-color:white;
+	border:none;
+	box-shadow:0 0 1px #c0c0c0 ;
+}
+.oTd{
+	text-align: center;
+}
+#rightContent a{
+	color: black;
+}
+#rightContent a:active{
+	color: #eca614;
+}
+#rightContent a:hover{
+	color: #eca614;
+}
+#mainContainer #rightContent #one span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #oneOne span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #two span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #three span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #four span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #five span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #six span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent ul li span{
+	font: bold 15px '微软雅黑';
+}
+#mainContainer #rightContent #six button{
+	border-radius:0px;
+}
+#mainContainer #rightContent #six input{
+	border-radius:0px;
+}
+#mainContainer #rightContent #five button{
+	border-radius:0px;
+}
+#mainContainer #rightContent #five input{
+	border-radius:0px;
+}
+#rightContent a{
+	cursor:pointer;
+}

@@ -1,0 +1,22 @@
+@CHARSET "UTF-8";
+
+body{
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding:0;
+}
+#outsideContent{
+	width:100%;
+	position:relative;
+	top:20px;
+	height:100%;
+	background-color: #f5f7fa;
+}
+#mainContainer{
+	position:relative;
+	padding-top:100px;
+	width:600px;
+	height:500px;
+	margin: 0 auto;		
+}

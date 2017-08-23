@@ -1,0 +1,25 @@
+@CHARSET "UTF-8";
+
+html{
+	font-size:62.5%;
+}
+body{
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding:0;
+}
+
+#mainContainer{
+	top:50px;
+	width:800px;
+	height:800px;
+	margin: 0 auto;
+	position:relative;
+}
+#mainContainer #accordin textarea{
+	width:350px;
+	height:130px;
+	border:1 solid #888888;
+	sresize:none;
+}

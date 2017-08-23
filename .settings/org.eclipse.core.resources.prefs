@@ -1,0 +1,16 @@
+=\=\=\=\=\=\=
+<<<<<<<=HEAD
+>>>>>>>=d5ce97b7d9df3aaeb8143f9f7f5e1c59f3ce79f0
+eclipse.preferences.version=1
+encoding//WebContent/resumeInput.jsp=UTF-8
+encoding//src/config.properties=UTF-8
+encoding//src/sz/iecas/controller/JobInfoController.java=UTF-8
+encoding//src/sz/iecas/controller/ResumeInputController.java=UTF-8
+encoding//src/sz/iecas/controller/UserController.java=UTF-8
+encoding//src/sz/iecas/controller/resumeCenterController.java=UTF-8
+encoding//src/sz/iecas/service/CityService.java=UTF-8
+encoding//src/sz/iecas/service/JobInfoService.java=UTF-8
+encoding//src/sz/iecas/service/UserService.java=UTF-8
+encoding//src/sz/iecas/service/impl/JobInfoServiceImpl.java=UTF-8
+encoding//src/sz/iecas/service/impl/UserServiceImpl.java=UTF-8
+encoding//src/sz/iecas/service/resumeService.java=GBK

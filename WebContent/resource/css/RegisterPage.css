@@ -1,0 +1,39 @@
+@CHARSET "UTF-8";
+
+body{
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding:0;
+}
+#outsideContainer{
+	width:100%;
+	position:absolute;
+	top:50px;
+	height:800px;
+	background-color: #f5f7fa;
+}
+#mainContent{
+	width:800px;
+	height:700px;
+	margin: 0 auto;
+	position:relative;	
+}
+#contentBody{
+	position:absolute;
+	width:100%;
+	height:550px;
+	top:85px;	
+	background-color: white;
+	box-shadow:0 0 5px #9C9C9C ;
+	boder-radius: 3px;
+}
+#mainContent #contentBody button{
+	border-radius:0px;
+	font-family:'微软雅黑';
+	height:35px;
+}
+#mainContent #contentBody input{
+	border-radius:0px;
+}
+
