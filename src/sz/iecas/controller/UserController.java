@@ -55,8 +55,10 @@ public class UserController {
 	public ModelAndView toCenter(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("personalCenter");
-		String userName=request.getParameter("username");		
-		User user=userService.getUserByUserName(userName);
+
+		String username=request.getParameter("username");
+		User user=userService.getUserByUserName(username);
+
 		mav.addObject("user", user);
 		ResumeTable resumeTable=null;
 		if(user.getPhoneNumber()!=null)
@@ -64,12 +66,11 @@ public class UserController {
 			
 			resumeTable=resumeCenterservice.getResumebyphone(user.getPhoneNumber());
 			
-			}
+			}                  
 		if(resumeTable==null)
 		{
 			System.out.println("没有简历序号");
 		}
-		else System.out.println(resumeTable.getResumeId());
 		mav.addObject("resume",resumeTable);
 		return mav;
 	}
@@ -79,14 +80,20 @@ public class UserController {
 		String info = null;
 		String userPhone = request.getParameter("phone");
 		ResumeTable resumeTable = resumeCenterservice.getResumebyphone(userPhone);
-		if(resumeTable != null){
-			info = "已申请过其他岗位，不能再次申请!";
-			return new ResponseEntity<String>(info, HttpStatus.BAD_REQUEST);
-		}else{
-			info = "未申请过岗位，可以申请!";
-			return new ResponseEntity<String>(info, HttpStatus.OK);
-		}
 		
+		if(resumeTable!=null&&!resumeTable.getStatus().equals("已储备")){
+			
+			return new ResponseEntity<String>(info, HttpStatus.BAD_REQUEST);
+		}
+	
+		else if (resumeTable == null)  {
+			info="可以申请";
+			return new ResponseEntity<String>(info, HttpStatus.OK);
+		}		
+		else {
+			String id=resumeTable.getResumeId().toString();
+			return new ResponseEntity<String>(id, HttpStatus.OK);
+		}
 	}
 	
 	@RequestMapping("/updateEmployee")
@@ -116,7 +123,7 @@ public class UserController {
 			if (subject.isAuthenticated()) {
 				User user = userService.getUserByUserName(username);
 				httpSession.setAttribute("user", user);
-				mv.setViewName("redirect:index");
+				mv.setViewName("redirect:index?username="+username);
 			}
 		} catch (IncorrectCredentialsException e) {
 			mv.setViewName("login");
@@ -190,7 +197,6 @@ public class UserController {
 		String password = request.getParameter("password");
 		String realname = request.getParameter("realname");
 		String roleCode = request.getParameter("roleCode");
-        System.out.println(username+password+realname+roleCode);
 		User user = userService.addUserByNameAndPassword(username, password, realname,roleCode);
 		return new ResponseEntity<User>(user, HttpStatus.OK);
 	}

@@ -8,7 +8,7 @@ body{
 }
 #outsideContent{
 	width:100%;
-	height:800px;
+	height:900px;
 	top:20px;
 	position:relative;
 	background-color:#f5f7fa;
@@ -28,17 +28,21 @@ body{
 #jobInfoContainer{
 	position:absolute;
 	left: 250px;
-	height:650px;
+	height:auto;
 	width:750px;
 	background-color:white;
 	box-shadow:0 0 5px #c0c0c0 ;
+	padding-bottom:80px;
 }
 #jobHolder{
-	position:absolute;
-	top:210px;
+	position:relative;
+	top:55px;
 	left:-5px;
 }
 .oTh, .oTd{
+	text-align:center;
+}
+#scheduleTable td{
 	text-align:center;
 }
 #jobInfoContainer ul li a{
@@ -59,4 +63,23 @@ body{
 }
 #jobInfoContainer #test li a:hover{
 	color: #eca614;
+}
+#jobInfoContainer #test2 li a:hover{
+	color: #eca614;
+}
+#downContent p{
+	font:bold 17px '黑体'
+}
+#recruitModal hr{
+	margin-top: 0px !important;
+	
+}
+#modifyModal .modal-body input{
+	border-radius:0;
+<<<<<<< HEAD
+}
+#publishModal .modal-body input{
+	border-radius:0;
+=======
+>>>>>>> 901815fd2886f9f5858d724566e563667828eb1f
 }

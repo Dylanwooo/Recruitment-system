@@ -4,19 +4,41 @@ $table.bootstrapTable({
 	pageSize: 10,
 	striped: true,
 	width:800,
-	height:430,
+	height:400,
 	pageList: [10,25,50,100],
 	singleSelect: false,
 	search: false,
 	clickToSelect: true,		
 });
 
-function searchjob(type){
-	
-  var search=document.getElementById("searchJob").value;
 
- var url="jobinfo?search="+search+"&type="+type;
+function selectmajor(major,type)
+{
+		 $.ajax({
+				type : "POST",
+				dataType : "json",
+				url : "jobinfoselect",
+				data : {
+					major:major,
+					type:type
+				},		
+				success : function(data,status) {			
+					console.log(data);		
+						    
+				},
+				error: function(){
+					alert("查询失败")
+				}
+			})
+			
+}
+
+
+function searchjob(type){	
+  var search=document.getElementById("searchJob").value;
+  var url="jobinfo?search="+search+"&type="+type;
   window.location=url;
+  search=url=null;
 }
 
 function updatejobinfo() {	
@@ -30,7 +52,8 @@ function updatejobinfo() {
 			jobrequire : $("#updatejobrequire").val(),
 			degree : $("#updatedegreerequire").val(),
 			number: $("#number").val(),
-			endtime:$("#time").val(),			
+			endtime:$("#time").val(),	
+			hot:$("#heat").val()
 		},		
 		success : function(data,status) {
 			alert("修改成功");
@@ -46,14 +69,18 @@ $('#modifyModal').on('show.bs.modal', function (event) {
 	var jobRequire = button.data('jobrequire')
 	var num=button.data('num')
 	var time=button.data('time')
+	var heat=button.data('hot')
 	var id=button.data('id')
 	var modal = $(this)
 	modal.find('.modal-body #updatejobdesc').val(jobDesc)
 	modal.find('.modal-body #updatejobrequire').val(jobRequire)
 	modal.find('.modal-body #number').val(num)
 	modal.find('.modal-body #time').val(time)
+	modal.find('.modal-body #heat').val(heat)
 	tempid=id	
-	})
+	//解除引用
+	button=jobDesc=jobRequire=num=time=id=null;
+})
 
 function publishJob(type){
 	$.ajax({
@@ -70,6 +97,7 @@ function publishJob(type){
 			endTime : $("#endTime").val(),
 			recuitNum : $("#recuitNum").val(),
 			departmentid:$("#departmentSelect").val(),
+			hot:$("#pubhot").val(),
 			type : type
 		},
 		success : function(data,status){
@@ -94,7 +122,9 @@ function tempJob(type){
 			jobRequire : $("#jobRequire").val(),
 			degreeRequire : $("#degreeRequire").val(),
 			endTime : $("#endTime").val(),
+			departmentid:$("#departmentSelect").val(),
 			recuitNum : $("#recuitNum").val(),
+			hot:$("#pubhot").val(),
 			type : type
 		},
 		success : function(data,status){
@@ -170,6 +200,12 @@ var msg = "确定要删除此专业吗？同时删除的还有此专业下的岗
 	})
 	}
 }
+
+$(document).ready(function(){
+	
+})
+
+
 
 
 	

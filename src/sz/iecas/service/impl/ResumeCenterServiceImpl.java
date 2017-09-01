@@ -3,12 +3,19 @@ package sz.iecas.service.impl;
 import java.util.List;
 
 import javax.annotation.Resource;
-import javax.swing.plaf.synth.SynthSpinnerUI;
 
 import org.springframework.stereotype.Service;
 
 import sz.iecas.dao.DepartmentInfoMapper;
+import sz.iecas.dao.EducationExtendMapper;
+import sz.iecas.dao.ExperienceExtendMapper;
+import sz.iecas.dao.LanguageExtendMapper;
+import sz.iecas.dao.ProjectExtendMapper;
 import sz.iecas.dao.ResumeTableMapper;
+import sz.iecas.model.EducationExtendExample;
+import sz.iecas.model.ExperienceExtendExample;
+import sz.iecas.model.LanguageExtendExample;
+import sz.iecas.model.ProjectExtendExample;
 import sz.iecas.model.ResumeTable;
 import sz.iecas.model.ResumeTableExample;
 import sz.iecas.model.ResumeTableExample.Criteria;
@@ -17,6 +24,16 @@ import sz.iecas.service.ResumeCenterService;
 public class ResumeCenterServiceImpl implements ResumeCenterService {
 @Resource ResumeTableMapper resumeTableMapper;
 @Resource DepartmentInfoMapper departmentInfoMapper;
+
+@Resource
+EducationExtendMapper educationMapper;
+
+@Resource
+ExperienceExtendMapper experienceExtendMapper;
+@Resource
+LanguageExtendMapper languageExtendMapper;
+@Resource
+ProjectExtendMapper projectExtendMapper;
 	@Override
 	public List<ResumeTable> getAllResume() {
 		ResumeTableExample resumeTableExample=new ResumeTableExample();
@@ -92,24 +109,45 @@ public class ResumeCenterServiceImpl implements ResumeCenterService {
 		}		
 			return resumeList;
 	}
+	
+	@Override
+	public int deleteResumeById(int id) {
+		resumeTableMapper.deleteByPrimaryKey(id);
+		EducationExtendExample extendExample=new EducationExtendExample();
+		extendExample.createCriteria().andResumeIdEqualTo(id);
+		educationMapper.deleteByExample(extendExample);
+		LanguageExtendExample languageExtendExample=new LanguageExtendExample();
+		languageExtendExample.createCriteria().andResumeIdEqualTo(id);
+		languageExtendMapper.deleteByExample(languageExtendExample);
+		ProjectExtendExample projectExtendExample=new ProjectExtendExample();
+		projectExtendExample.createCriteria().andResumeIdEqualTo(id);
+		projectExtendMapper.deleteByExample(projectExtendExample);
+		ExperienceExtendExample experienceExtendExample=new ExperienceExtendExample();
+		experienceExtendExample.createCriteria().andResumeIdEqualTo(id);
+
+		experienceExtendMapper.deleteByExample(experienceExtendExample);			
+
+		return 0;
+	}
 	@Override
 	public List<ResumeTable> getResumebyall(String sex, String majorname, String type, String degree, String search,
-			String department, String start, String end) 
+			String department, String start, String end,String job,String Status) 
 	{
 		ResumeTableExample resumeTableExample=new ResumeTableExample();
 		Criteria criteria=resumeTableExample.createCriteria();
-		if(sex!=null&&sex!="") criteria.andSexEqualTo(sex);
-		if(majorname!=null&&majorname!="" )  criteria.andMajorNameEqualTo(majorname);
-		if(type!=null&&type!="") criteria.andJobtypeEqualTo(Integer.parseInt(type) );
-		if(degree!=null&&degree!="")  criteria.andHighestdegreeEqualTo(Integer.parseInt(degree));
-		if(search!=null&&search!="") criteria.andschoolLike("%"+search+"%");
-		if(department!=null&department!="") criteria.anddepartmentidEqualTo(Integer.parseInt(department));
+		if(sex!=null&&sex.length()>0) criteria.andSexEqualTo(sex);
+		if(majorname!=null&&majorname.length()>0 )  criteria.andMajorNameEqualTo(majorname);
+		if(type!=null&&type.length()>0) criteria.andJobtypeEqualTo(Integer.parseInt(type) );
+		if(degree!=null&&degree.length()>0)  criteria.andHighestdegreeEqualTo(Integer.parseInt(degree));
+		if(search!=null&&search.length()>0) criteria.andschoolLike("%"+search+"%");
+		if(department!=null&&department.length()>0) criteria.anddepartmentidEqualTo(Integer.parseInt(department));
+		if(job!=null&&job.length()>0) criteria.andJobnameLike("%"+job+"%");
+		if(Status!=null&&Status.length()>0) criteria.andStatusEqualTo(Status);
 		List<ResumeTable> resumeList=resumeTableMapper.selectmyresume(resumeTableExample);
 		if(start!=null&&end!=null&&start!=""&&end!="")
 		{
 			int n=resumeList.size();
-			System.out.println("n="+n);
-			if(n==0)  resumeList=getResumebytime(start, end);
+			if(n==0)  return resumeList;
 			else
 			{
 			String  Start=null;
@@ -119,7 +157,6 @@ public class ResumeCenterServiceImpl implements ResumeCenterService {
 			
 			for(int i=0;i<n;i++)
 			{
-			System.out.println(resumeList.get(i).getSubmittime());
 				String submittime = resumeList.get(i).getSubmittime().replaceAll("-", "");
 				
 				if(Integer.parseInt(submittime)>Integer.parseInt(End)||Integer.parseInt(submittime)<Integer.parseInt(Start))

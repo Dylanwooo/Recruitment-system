@@ -1,9 +1,8 @@
 /**
  *  应聘者增删改查
  */
-
+var temp;
 function updateEmployee() {
-	
 	$.ajax({
 		type : "POST",
 		dataType : "json",
@@ -22,7 +21,6 @@ function updateEmployee() {
 		}
 	})	
 }
-var temp;
 
 $('#updateUserModal').on('show.bs.modal', function (event) {
 	
@@ -43,6 +41,8 @@ $('#updateUserModal').on('show.bs.modal', function (event) {
 	modal.find('.modal-body #updatephone').val(phone)
 	modal.find('.modal-body #updateemail').val(email)
 	temp = id;
+	//解除引用
+	button=id=username=password=realname=sex=phone=idcardnumber=address=email=null;
 	})
 	
 

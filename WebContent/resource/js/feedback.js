@@ -4,7 +4,6 @@
 
 function onUpload(){	
 	var feedbacktext = document.getElementById("inputContent").value;
-
 	$.ajax({
 		type : "POST",
 		dataType : "json",
@@ -20,7 +19,7 @@ function onUpload(){
 			alert(jqXHR.responseText);
 		}	
 	})
-	 
+	feedbacktext=null;
 }
 
 

@@ -21,7 +21,7 @@
      <div class="col-md-12 col-sm-10 col-xs-9" style="position:absolute; float:left; display:inline;">
 	     <div style="position:absolute;float:left; width:300px;">
 	        <span class="glyphicon glyphicon-bookmark" aria-hidden="true" style="font-size:30px; color:black;"></span>
-	        <span style="font:bold 30px '幼圆'"><strong>${resumeInfo.jobname}</strong></span>    
+	        <span style="font:bold 30px '微软雅黑'"><strong>${resumeInfo.jobname}</strong></span>    
 	     </div>
 	     <div id="types" style="position:absolute; left:320px; float:left; width:300px;">
 	        <c:if test= "${resumeInfo.jobtype==1}"> <span><strong>校园招聘
@@ -70,7 +70,19 @@
 			           <span>${resumeInfo.birthdate }</span>
 			         </div> 		         
 			      </div>
-			            
+			      <div class="col-md-12 col-sm-12 col-xs-12" style="float:left; display:inline; position:relative;padding-top:20px;left:20px;">
+			         <div style="float:left; ">
+			           <span><strong>籍贯：</strong></span>
+			         </div>
+			         <div style="float:left">
+			         	<c:if test="${resumeInfo.city=='市辖区'||resumeInfo.city=='县' }">
+			         		<span>${resumeInfo.province } ${resumeInfo.area }</span>
+			         	</c:if>	
+			         	<c:if test="${resumeInfo.city!='市辖区' }">
+			         		<span>${resumeInfo.province } ${resumeInfo.city } ${resumeInfo.area }</span>	
+			         	</c:if>        				         			         				            
+			         </div> 		         
+			      </div>     
 			       <div class="col-md-12" style="float:left; display:inline; position:relative; padding-top:20px;left:20px;">
 			         <div style="float:left; ">
 			           <span><strong>身份证：</strong></span>
@@ -206,23 +218,68 @@
 			 <div class="col-md-offset-4 col-sm-offset-4 col-xs-offset-3">	       
 			   <a href="download_successful?workplace=${resumeInfo.workplace}">
 			     <button class="btn btn-default" type="button" name="download_resumetable"
-			     style="font:bold 16px '黑体';height:35px;border-radius:0px;background-color:#eca614;color:white;border:none;width:230px;">
+			     style="font:bold 16px '黑体';height:35px;border-radius:0px;background-color:#eca614;color:white;border:none;width:200px;">
 			               下载已上传简历
 			     </button>
-			   </a>
+			   </a>	  			   
 	         </div>
          </c:if>
          <c:if test="${!flag}">
          	<c:if test="${user.roleCode=='hr'}">
          		<input type="hidden" id="name" value="${resumeInfo.name}"><a id="downLoad" href="#">
-         	<button class="btn btn-default" style="border-radius:0;background-color:#eca614;border:none;color:white;font-family:'微软雅黑'">保存当前网页</button></a>	
+         		<button class="btn btn-default" style="border-radius:0;background-color:#eca614;border:none;
+         		color:white;font-family:'微软雅黑'">保存当前网页
+         		</button></a>        		 
          	</c:if>        	
-         </c:if>
-         </div>
-         </div>        
-	</div>
+         </c:if>        
+       	 <c:if test="${user.roleCode=='hr'}">
+	       	 <div style="position:relative;top:20px;" class="col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+	       	 	<c:if test="${resumeInfo.status=='简历投递成功'}">
+		       	 	<span style="font:bold 15px '微软雅黑'">是否通过简历筛选：</span>
+		         	<button onclick="pass('${resumeInfo.resumeId}','${user.roleCode }','通过简历筛选')" class="btn btn-default" 
+		        		style="background-color:#5baffa;border:none;color:white;font-family:'微软雅黑'">
+		        		<span style="font-size:17px;"class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+		        	</button>
+		        	<button onclick="deny('${resumeInfo.resumeId}')" class="btn btn-default" 
+		        		style="position:relative;left:30px;font-family:'微软雅黑'">
+		        		<span style="font-size:17px;"class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		        	</button>
+	        	</c:if>
+	        	<c:if test="${resumeInfo.status=='通过专业面试'}">
+		       	 	<span style="font:bold 15px '微软雅黑'">是否通过综合面试：</span>
+		         	<button onclick="pass('${resumeInfo.resumeId}','${user.roleCode }','通过综合面试')" class="btn btn-default" 
+		        		style="background-color:#5baffa;border:none;color:white;font-family:'微软雅黑'">
+		        		<span style="font-size:17px;"class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+		        	</button>
+	        	
+		        	<button onclick="deny('${resumeInfo.resumeId}')" class="btn btn-default" 
+		        		style="position:relative;left:30px;font-family:'微软雅黑'">
+		        		<span style="font-size:17px;"class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+		        	</button>	
+	        	</c:if>	      	
+	         </div>
+          </c:if> 
+          <c:if test="${user.roleCode=='interviewer'}">
+       		<c:if test="${resumeInfo.status=='通过简历筛选'}">
+          	<div style="position:relative;top:20px;" class="col-md-offset-3 col-sm-offset-3 col-xs-offset-3">
+	       	 	<span style="font:bold 15px '微软雅黑'">是否通过专业面试：</span>
+	         	<button onclick="pass('${resumeInfo.resumeId}','${user.roleCode }')" class="btn btn-default" 
+	        		style="background-color:#5baffa;border:none;color:white;font-family:'微软雅黑'">
+	        		<span style="font-size:17px;"class="glyphicon glyphicon-ok" aria-hidden="true"></span>
+	        	</button>
+	        	<button onclick="deny('${resumeInfo.resumeId}')" class="btn btn-default" 
+	        		style="position:relative;left:30px;font-family:'微软雅黑'">
+	        		<span style="font-size:17px;"class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+	        	</button>
+	        </div>	
+	        </c:if>
+          </c:if>         	            
+       </div>
+    </div>        
+</div>
 	
   <jsp:include page="common/common_bottom.jsp"></jsp:include>
 </body>
 <script type="text/javascript" src="${webroot}/resource/js/fileControl.js"></script>
+<script type="text/javascript" src="${webroot}/resource/js/preview.js"></script>
 </html>

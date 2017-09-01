@@ -43,7 +43,8 @@ body{
 	outline:none;
 	border:0px; 
 	resize:none;
-	font-family: '仿宋';
+	font-family: '黑体';
+	font-size:15px;
 	color:#000;
 }
 #imgHolder{

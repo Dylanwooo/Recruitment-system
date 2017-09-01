@@ -47,21 +47,23 @@ public class FileUploadController {
 		HttpServletRequest request)throws IOException{
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("resumePreview");
-		path="E:/download/"+new Date().getTime()+file.getOriginalFilename();		
-		File newFile = new File(path);
-		//通过CommonsMulitipartFile的方法直接写文件
-		file.transferTo(newFile);
-	
-		//将文件名字写入数据库
-		
-		String userName = request.getParameter("username");
-		System.out.println(userName);
-		User user=userService.getUserByUserName(userName);
 		int resumeId=0;
+		String userName = request.getParameter("username");
+		User user=userService.getUserByUserName(userName);		
 		if(user.getPhoneNumber()!=null){
-			 resumeId = resumeCenterservice.getResumeIdByPhone(user.getPhoneNumber());
-			 resumeCenterservice.updateResumeUploadPathByresumeId(resumeId, path);
+			 resumeId = resumeCenterservice.getResumeIdByPhone(user.getPhoneNumber());			
 			}
+		if(file.getOriginalFilename()!="")			
+			{
+			
+			path="E:/download/"+new Date().getTime()+file.getOriginalFilename();		
+			File newFile = new File(path);
+			//通过CommonsMulitipartFile的方法直接写文件
+			file.transferTo(newFile);
+			 resumeCenterservice.updateResumeUploadPathByresumeId(resumeId, path);
+			//将文件名字写入数据库			
+			}
+		
 		ResumeTable resumeTable = new ResumeTable();
 		List<EducationExtend> educationExtend = null;
 		List<ExperienceExtend> experienceExtend = null;
@@ -71,7 +73,6 @@ public class FileUploadController {
 		experienceExtend = experienceExtendService.getExperienceExtend(resumeId);
 		projectExtendWithBLOBs = projectExtendService.getProjectExtend(resumeId);
 		
-		// 设置简历状态为已查看 1.待查看 2.已查看	
 		mav.addObject("resumeInfo",resumeTable);
 		mav.addObject("educationExtend",educationExtend);
 		mav.addObject("experienceExtend",experienceExtend);

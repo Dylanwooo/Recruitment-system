@@ -53,6 +53,7 @@ public interface ResumeTableMapper {
      * @mbggenerated
      */
     List<ResumeTable> selectByExampleWithBLOBs(ResumeTableExample example);
+    //Wty
     List<ResumeTable> selectmyresume(ResumeTableExample example);
 
     /**

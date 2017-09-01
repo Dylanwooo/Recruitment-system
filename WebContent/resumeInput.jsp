@@ -49,7 +49,7 @@
 					        	<span><span style="color:red">*</span><strong>年龄：</strong></span>
 					        </div>
 					        <div style="float:left">
-					        	<input type="text" class="form-control" placeholder="请输入年龄" style="width:200px;" id="age">
+					        	<input type="text" class="form-control" placeholder="请输入年龄" style="width:200px;" id="age" ">
 					        </div>		         
 				        </div>
 				        <div class="col-md-12 col-sm-12 col-xs-12" style="float:left; display:inline; position:relative;padding-top:15px;left:15px;">
@@ -57,8 +57,12 @@
 					        	<span><span style="color:red">*</span><strong>性别：</strong></span>
 					        </div>
 					        <div style="float:left">
-					        	<input type="text" class="form-control" placeholder="请输入性别" style="width:200px;" id="sex">
-					        </div> 		         
+					        	<!-- <input type="text" class="form-control" placeholder="请输入性别" style="width:200px;" id="sex" > -->					        	
+					        	<label>男 <input type="radio" value="男" name='sex's></label>					       
+					        </div> 
+					        <div style="float:left;position:relative; left:5px;">					        	
+					        	<label>女 <input type="radio" value="女" name='sex'></label>
+					        </div>		         
 				        </div>  
 				        <div class="col-md-12 col-sm-12 col-xs-12" style="float:left; display:inline; position:relative; padding-top:2rem;left:-13px;">
 					        <div style="float:left; ">
@@ -66,7 +70,8 @@
 					        </div>
 					        <div style="float:left" class="layui-inline">		   
 						       	<input id="birthDate" placeholder="选择日期" class="layui-input" 
-						       	onclick="layui.laydate({elem:this, istime:true, format: 'YYYY-MM-DD'})">
+						       	onclick="layui.laydate({elem:this, istime:true, format: 'YYYY-MM-DD'})"
+						       >
 					        </div> 		         
 				        </div> 
 				        <div class="col-md-12 col-sm-12 col-xs-12" style="float:left; display:inline; position:relative; padding-top:2rem;left:20px;">
@@ -90,7 +95,7 @@
 					        	<span><span style="color:red">*</span><strong>身份证：</strong></span>
 					        </div>
 					        <div style="float:left">
-					        	<input type="text" class="form-control" placeholder="请输入身份证" style="width:200px;" id="idCard">
+					        	<input type="text" class="form-control" placeholder="请输入身份证" style="width:200px;" id="idCard" >
 					        </div> 		         
 				        </div>
 				        <div class="col-md-12 col-sm-12 col-xs-12" style="float:left; display:inline; position:relative; padding-top:2rem; left:15px;">
@@ -106,7 +111,11 @@
 					            </select>
 				            </div> 		         	                
 				            <div style="float:left;">
-					            <select id="homeCity" >             
+					            <select id="homeCity" onchange="getHomeArea(this.value,'homeArea')">				          
+					            </select>
+				            </div>  
+				            <div style="float:left;">
+					            <select id="homeArea" >             
 					            </select>
 				            </div>  			                
 				        </div>
@@ -123,7 +132,7 @@
 					        	<span><strong>奖励荣誉：</strong></span>
 					        </div>
 					        <div style="float:left">	           
-					        	<textarea style="width:350px;height:130px;border:1 solid #888888;resize:none;" id="awards"></textarea>
+					        	<textarea style="width:350px;height:130px;border:1 solid #888888;resize:none;" id="awards" ></textarea>
 					        </div> 
 				        </div>
 				     </div>
@@ -135,8 +144,8 @@
 			          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
 			                            教育背景
 			          </a>
-			          <button type="button" style="position:absolute;right:40px;border-radius:999999px;border:none;" class="addEduButton1" >
-			             <span class="glyphicon glyphicon-plus"></span>
+			          <button class="btn btn-default"type="button" style="position:relative;left:500px;" id="addEduButton1" >
+			             <span class="glyphicon glyphicon-plus">添加教育背景</span>
 			          </button>
 			        </h4>
 			     </div>
@@ -155,9 +164,10 @@
 			     				 </select>
 			     			</div>
 			     			<div class="city1" style="float:left;">
-			           			<select>           
+			           			<select >           
 			           			</select>
 			         		</div> 
+			         
 			     		</div>
 			     		<div id="inputTime1" class="col-md-12 col-sm-12 col-xs-12" style="float:left; display:inline; position:relative; padding-top:2rem;left:-13px;">
 				            <div style="float:left; ">
@@ -267,8 +277,8 @@
 					 	<a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
 					   	 项目经历
 						 </a>
-						 <button style="position:absolute;right:40px;border-radius:999999px;border:none;"type="button" class="addProButton1" >
-			          	 		<span class="glyphicon glyphicon-plus"></span>
+						 <button class="btn btn-default"style="position:relative;left:500px;"type="button" id="addProButton1" >
+			          	 		<span class="glyphicon glyphicon-plus">添加项目经历</span>
 			          	 </button>
 					 </h4>
 				 </div>

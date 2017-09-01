@@ -18,14 +18,18 @@ import java.io.File;
 
 import sz.iecas.model.JobInfoWithBLOBs;
 import sz.iecas.model.Province;
+import sz.iecas.model.ResumeTable;
+import sz.iecas.model.User;
+import sz.iecas.service.AreaService;
 import sz.iecas.service.CityService;
 import sz.iecas.service.JobInfoService;
 import sz.iecas.service.ProvincesService;
+import sz.iecas.service.ResumeCenterService;
 import sz.iecas.service.resumeService;
 
 @Controller
 public class ResumeInputController {
-	
+	@Resource ResumeCenterService resumeCenterService;
 	@Resource
 	resumeService resumeService;
 	@Resource
@@ -34,11 +38,14 @@ public class ResumeInputController {
 	ProvincesService provincesService;
 	@Resource
 	CityService cityService;
+	@Resource
+	AreaService areaService;
 	@RequestMapping("/resumeInput")
 	public ModelAndView toIndex(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("resumeInput");
 		JobInfoWithBLOBs jobInfoWithBLOBs=null;
+		
 		String id = request.getParameter("id");
 		if(id!=null)
 		{
@@ -197,9 +204,11 @@ public class ResumeInputController {
 			}
 		}
 		String homeProvinceId = request.getParameter("homePro");
+
 		String schoolProvinceId = request.getParameter("schoolPro");
 		String schoolProvinceId2 = request.getParameter("schoolPro1");
 		String schoolProvinceId3 = request.getParameter("schoolPro2");
+		
 		if(homeProvinceId.equals("请选择")){
 			info = "请选择籍贯!";
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
@@ -208,11 +217,10 @@ public class ResumeInputController {
 			info = "请选择学校地区!";
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
 		}
-		
 		if(name.equals("")){
 			info = "姓名不能为空!";
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
-		}else if (sex.equals("")) {
+		}else if (sex==null) {
 			info = "性别不能为空!";
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
 		}else if (phoneNumber.equals("")) {
@@ -229,7 +237,10 @@ public class ResumeInputController {
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
 		} else if (graduateDate.equals("")) {
 			info = "毕业时间不能为空!";
-			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
+			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);}
+		else if (startDate.equals("")) {
+				info = "入学时间不能为空!";
+				return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
 		}else if (request.getParameter("age").equals("")) {
 			info = "年龄不能为空!";
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
@@ -237,37 +248,39 @@ public class ResumeInputController {
 			info = "身份证号格式错误!";
 			return new ResponseEntity<>(info,HttpStatus.BAD_REQUEST);
 		}else {
-			String homeCity = request.getParameter("homeCity");
-			String homeCityId = cityService.getCityId(homeCity);
-			String schoolCity = request.getParameter("schoolCity");
-			String schoolCityId = cityService.getCityId(schoolCity);
+			String homeCityId = request.getParameter("homeCity");
+			String homeCity=cityService.getCityName(homeCityId);
+			String homeAreaId=request.getParameter("homeArea");
+			String homeArea=areaService.getAreaName(homeAreaId);
+			String schoolCityId = request.getParameter("schoolCity");			
 			String schoolCity2 = null;
 			String schoolCity3 = null;
 			String schoolCityId2 = null;
 			String schoolCityId3 = null;
 			if(addEdu == 2 ){
 				if(!schoolProvinceId2.equals("请选择")){
-					schoolCity2 = request.getParameter("schoolCity1");		
-					schoolCityId2 = cityService.getCityId(schoolCity2);
+					schoolCityId2 = request.getParameter("schoolCity1");		
+				
 				}
 			}else if (addEdu == 3) {
 				if(!schoolProvinceId2.equals("请选择")){
-					schoolCity2 = request.getParameter("schoolCity1");		
-					schoolCityId2 = cityService.getCityId(schoolCity2);
+					schoolCityId2 = request.getParameter("schoolCity1");		
+					
 				}
 				if(!schoolProvinceId3.equals("请选择")){		
-					schoolCity3 = request.getParameter("schoolCity2");
-					schoolCityId3 = cityService.getCityId(schoolCity3);
+					schoolCityId3 = request.getParameter("schoolCity2");
+					
 				}
 			}
 			int age = Integer.parseInt(request.getParameter("age"));
+			String homeProvince=provincesService.getProvinceName(homeProvinceId);
 			resumeService.resumeInput(name,age,sex,birthDate,phoneNumber,email,idCard,
 					address,awards,startDate,graduateDate,degree,school,major,rank,languageType,proficiency,
 					experienceDescription,
 					projectName2,time2,role2,projectDescription2,projectName3,time3,role3,projectDescription3,
 					projectName,time,role,projectDescription,
 					jobName,type,majorName,
-					homeProvinceId,homeCityId,schoolProvinceId,schoolCityId,submitTime,startDate2,graduateDate2,degree2,school2,
+					homeProvince,homeCity,homeArea,schoolProvinceId,schoolCityId,submitTime,startDate2,graduateDate2,degree2,school2,
 					major2,rank2,languageType2,proficiency2,experienceDescription2,schoolProvinceId2,schoolCityId2,
 					startDate3,graduateDate3,degree3,school3,major3,rank3,languageType3,proficiency3,experienceDescription3,
 					schoolProvinceId3,schoolCityId3,addEdu,addPro);

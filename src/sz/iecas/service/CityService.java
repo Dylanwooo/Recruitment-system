@@ -12,5 +12,6 @@ public interface CityService {
 	 */
 	List<City> getCitiesByProvinceId(String id);
 	String getCityId(String cityname);
+	public String getCityName(String id);
 
 }

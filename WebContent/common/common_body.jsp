@@ -5,7 +5,7 @@
 <head>
   <link rel="stylesheet" href="${webroot }/resource/css/common_body.css">
   <script src="${webroot }/resource/libs/jquery-3.2.1.min.js"></script>
-  <script type="text/javascript" src="${webroot}/resource/js/common_body.js"></script>
+
 </head>
  
 <header class="navbar navbar-static-top bs-docs-nav" id="top" role="banner" >
@@ -21,10 +21,13 @@
 		    <ul class="nav navbar-nav" id="olist">
 			<!-- 在herf后加入想要跳转的页面 -->	
 				<li><img src="resource/img/logo.jpg" style="width:50px;height:50px;"></li>
-			    <li><a href="index" class="fontStyle" style="color:#a0a0a0;" >首页</a></li>					
-				<li><a href="jobinfo?type=1" class="fontStyle" style="color:#a0a0a0;" >校园招聘</a></li>
-				<li><a href="jobinfo?type=2" class="fontStyle" style="color:#a0a0a0;">社会招聘</a></li>
-				<li><a href="jobinfo?type=3" class="fontStyle" style="color:#a0a0a0;">实习生招聘</a></li>
+			    <li><a href="index?username=${user.userName}" class="fontStyle" style="color:#a0a0a0;" >首页</a></li>	
+			    <c:if test="${user.roleCode!='interviewer'}">
+			    	<li><a href="jobinfo?type=1" class="fontStyle" style="color:#a0a0a0;" >校园招聘</a></li>
+					<li><a href="jobinfo?type=2" class="fontStyle" style="color:#a0a0a0;">社会招聘</a></li>
+					<li><a href="jobinfo?type=3" class="fontStyle" style="color:#a0a0a0;">实习生招聘</a></li>
+			    </c:if>				
+				
 				<c:if test="${user.roleCode==null}">
 				  <li>
 				  <c:if test="${user.userName==null}">
@@ -39,10 +42,10 @@
 				  <li><a href="user" class="fontStyle" style="color:#a0a0a0;">用户中心</a></li>
 				</c:if>	
 				<c:if test="${user.roleCode=='hr'}">
-				  <li><a href="resumeCenter" class="fontStyle" style="color:#a0a0a0;">简历中心</a></li>
+				  <li><a href="resumeCenter?role=hr" class="fontStyle" style="color:#a0a0a0;">简历中心</a></li>
 				</c:if>	
 				<c:if test="${user.roleCode=='interviewer'}">
-				  <li><a href="resumeCenter" class="fontStyle" style="color:#a0a0a0;">简历中心</a></li>
+				  <li><a href="resumeCenter?role=interviewer" class="fontStyle" style="color:#a0a0a0;">简历中心</a></li>
 				</c:if>									
 				<li><a href="aboutme" class="fontStyle" style="color:#a0a0a0;">走进苏研院</a></li>
 				<li><a href="feedback" class="fontStyle" style="color:#a0a0a0;">内测反馈</a></li>

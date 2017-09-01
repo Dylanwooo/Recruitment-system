@@ -18,12 +18,12 @@ public interface JobInfoService {
 	JobInfoWithBLOBs  updateStatusbytime(String time);
 	
 	
-	JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime);
+	JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime,int hot);
 	//通过id删除岗位信息
 	int deleteJobById(int id);
 	JobInfo updateJobStatusById(int id);
 
 	JobInfoWithBLOBs getJobInfo(int id);
 	 JobInfoWithBLOBs publishJob(String jobName,String workPlace, String major, String publishTime, String jobDesc, 
-				String jobRequire, int degreeRequire, String endTime,int recuitNum,int status,int type,int departmentid);
+				String jobRequire, int degreeRequire, String endTime,int recuitNum,int status,int type,int departmentid,int hot);
 }

@@ -1,8 +1,5 @@
 package sz.iecas.service.impl;
 
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.Resource;
@@ -47,7 +44,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 
 	@Override
 	public JobInfoWithBLOBs publishJob(String jobName,String workPlace, String major, String publishTime, String jobDesc, 
-			String jobRequire, int degreeRequire, String  endTime,int recuitNum,int status,int type,int departmentid){
+			String jobRequire, int degreeRequire, String  endTime,int recuitNum,int status,int type,int departmentid,int hot){
 		JobInfoWithBLOBs jobInfoWithBLOBs = new JobInfoWithBLOBs();
 		
 		jobInfoWithBLOBs.setName(jobName);
@@ -62,6 +59,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 		jobInfoWithBLOBs.setJobStatus(status);
 		jobInfoWithBLOBs.setType(type);
 		jobInfoWithBLOBs.setDepartmentid(departmentid);
+		jobInfoWithBLOBs.sethot(hot);
 		jobInfoMapper.insertSelective(jobInfoWithBLOBs);
 		return jobInfoWithBLOBs;
 	}
@@ -102,7 +100,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 		return job;
 	}
 	@Override
-	public JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime) {
+	public JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime,int hot) {
 		JobInfoExample jobInfoExample=new JobInfoExample();
 		jobInfoExample.createCriteria().andIdEqualTo(id);
 		JobInfoWithBLOBs job=new JobInfoWithBLOBs();
@@ -112,6 +110,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 		job.setJobRequire(jobrequire);
 		job.setNum(number);
 		job.setJobStatus(1);
+		job.sethot(hot);
 		jobInfoMapper.updateByExampleSelective(job, jobInfoExample);
 		return job;
 	}
@@ -122,19 +121,17 @@ public class JobInfoServiceImpl implements JobInfoService {
 	@Override
 	public JobInfoWithBLOBs updateStatusbytime(String time) {
 		String now=time.replaceAll("-", "");
-		System.out.println("now="+now);
 		JobInfoExample jobInfoExample=new JobInfoExample();
 		jobInfoExample.createCriteria().andJobStatusEqualTo(1);
 		List<JobInfoWithBLOBs>  jobinfoList = jobInfoMapper.selectByExampleWithBLOBs(jobInfoExample);	
 		for(int i=0;i<jobinfoList.size();i++)
 		{
 			String endtime=jobinfoList.get(i).getEndtime().replaceAll("-", "");
-			System.out.println("endtime"+endtime);
 			if(Integer.parseInt(endtime)<Integer.parseInt(now))
 			{
 				JobInfoWithBLOBs job=new JobInfoWithBLOBs();
 				job.setJobStatus(4);
-				jobInfoMapper.updateByPrimaryKey(job);
+				jobInfoMapper.updateByPrimaryKeySelective(job);
 			}
 			
 			

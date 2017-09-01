@@ -55,7 +55,11 @@ public class MajorServiceImpl implements MajorService {
 		jobInfoExample.createCriteria().andMajorNameEqualTo(name);
 		List<JobInfoWithBLOBs> jobInfoWithBLOBs = jobInfoMapper.selectByExampleWithBLOBs(jobInfoExample);
 		for(int i=0;i<jobInfoWithBLOBs.size();i++){
-			jobInfoMapper.deleteByPrimaryKey(jobInfoWithBLOBs.get(i).getId());
+			JobInfoExample jobinfo=new JobInfoExample();
+			jobinfo.createCriteria().andIdEqualTo(jobInfoWithBLOBs.get(i).getId());		
+			JobInfoWithBLOBs job=new JobInfoWithBLOBs();
+			job.setJobStatus(3);
+			jobInfoMapper.updateByExampleSelective(job, jobinfo);
 		}
 		
 		return majorMapper.deleteByPrimaryKey(id);

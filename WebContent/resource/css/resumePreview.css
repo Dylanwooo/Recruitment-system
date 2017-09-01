@@ -13,10 +13,10 @@ body{
 	position:relative;
 }
 #mainContainer h3{
-	font: bold 18px '幼圆';
+	font-family: '微软雅黑';
 }
 #mainContainer #types span{
-	font: bold 30px '幼圆';
+	font: bold 30px '微软雅黑';
 }
 #mainContainer textarea{
 	outline:none;

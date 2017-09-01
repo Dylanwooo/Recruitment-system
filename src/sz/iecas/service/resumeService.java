@@ -22,11 +22,12 @@ public interface resumeService {
 			String projectName2, String time2, String role2, String projectDescription2,
 			String projectName3, String time3, String role3, String projectDescription3,
 			String jobName, int type,String majorName,
-			String homeProId,String homeCityId,String schoolProId,String schoolCityId,SimpleDateFormat submitTime,
+			String homeProId,String homeCityId,String homeAreaId,String schoolProId,String schoolCityId,SimpleDateFormat submitTime,
 			String startDate2,String graduateDate2,int degree2,String school2,String major2,String rank2,String languageType2,
 			int proficiency2,String experienceDescription2,String schoolProvinceId2,String schoolCityId2,
 			String startDate3,String graduateDate3,int degree3,String school3,String major3,String rank3,String languageType3,
 			int proficiency3,String experienceDescription3,String schoolProvinceId3,String schoolCityId3,int addEdu,int addPro);	
 	public void updateResuemStatusById(int resumeId, String status);
+	ResumeTable resumeUpdate(int jobid,int resumeid);
 }
 

@@ -44,7 +44,7 @@ $(document).ready = $(function(){
 	oriDom2.children('#roleInput').find('input').attr('id','role'+0);
 	oriDom2.children('#descInput').find('textarea').attr('id','projectDescription'+0);
 	
-	$('.addEduButton1').click(function(){
+	$('#addEduButton1').click(function(){
 		var length = parentDom.children().length;
 		addEdu++
 		if(Threshold>length&&i<=length){															
@@ -73,10 +73,11 @@ $(document).ready = $(function(){
 		else{
 			alert("最多添加三个教育经历！");
 			return false
-		}		
+		}
+		length=null;
 	})
 	
-	$('.addProButton1').click(function(){
+	$('#addProButton1').click(function(){
 		var length2 = parentDom2.children().length;
 		addPro++
 		if(Threshold>length2&&j<=length2){	
@@ -99,7 +100,7 @@ $(document).ready = $(function(){
 			alert("最多添加三个项目经历！");
 			return false
 		}
-		
+		length2=null;
 	})
 })
 
@@ -113,11 +114,11 @@ function getHomeCity(provinceId,selectId){
 		},
 	success : function (response){
 		var arr = null;
-		var temp="";
+		var temp="<option>请选择</option>";
 		
 		arr = eval(response);
 		for(var i in arr){
-			temp += "<option value='" + arr[i].city +"'>";
+			temp += "<option value=" + arr[i].cityid +">";
 			temp += arr[i].city;
 			temp += "</option>";
 		}
@@ -125,10 +126,31 @@ function getHomeCity(provinceId,selectId){
 	}
 	})
 }
-
+function getHomeArea(cityid,selectId){
+	$.ajax({
+		type : "POST",
+		dataType : "json",
+		url : "getArea",
+		data : {
+		id: cityid,
+		},
+	success : function (response){
+		var arr = null;
+		var temp="<option>请选择</option>";
+		
+		arr = eval(response);
+		for(var i in arr){
+			temp += "<option value=" + arr[i].areaid +">";
+			temp += arr[i].area;
+			temp += "</option>";
+		}
+		$("#"+selectId).html(temp);
+	}
+	})
+}
 
 function getCity(provinceId){
-	var schoolId = "schoolCity" + (addEdu - 1)
+	var schoolId = "schoolCity" + (i - 1)
 	$.ajax({
 		type : "POST",
 		dataType : "json",
@@ -138,11 +160,11 @@ function getCity(provinceId){
 		},
 	success : function (response){
 		var arr = null;
-		var temp="";
+		var temp="<option>请选择</option>";
 		
 		arr = eval(response);
 		for(var i in arr){
-			temp += "<option value='" + arr[i].city +"'>";
+			temp += "<option value=" + arr[i].cityid +">";
 			temp += arr[i].city;
 			temp += "</option>";
 		}
@@ -152,6 +174,7 @@ function getCity(provinceId){
 }
 
 function inputResume(userEmail,userPhoneNumber,jobName,jobType,majorname) {
+	
 	$.ajax({
 		type : "POST",
 		dataType : "json",
@@ -160,7 +183,7 @@ function inputResume(userEmail,userPhoneNumber,jobName,jobType,majorname) {
 		//个人信息	
 			name : $("#name").html(),
 			age : $("#age").val(),
-			sex : $("#sex").val(),
+			sex : $('input:radio[name="sex"]:checked').val(),
 			birthDate : $("#birthDate").val(),
 			phoneNumber : userPhoneNumber,
 			email : userEmail,
@@ -169,6 +192,7 @@ function inputResume(userEmail,userPhoneNumber,jobName,jobType,majorname) {
 			awards : $("#awards").val(),
 			homePro : $("#homePro").val(),
 			homeCity : $("#homeCity").val(),
+			homeArea:$("#homeArea").val(),
 		//教育经历表1	
 			startDate : $("#startDate0").val(),
 			graduateDate : $("#graduateDate0").val(),

@@ -44,7 +44,7 @@
 								</label>													  													  														  
 							</div>
 							<div class="form-group">
-								<button style="border-radius:0px;background-color:#eca614; border:none;" type="submit" 
+								<button style="border-radius:0px;background-color:#eca614; border:none;" type="submit" onclick=""
 								class="btn btn-primary form-control" name="log_in">
 								<span style="font: bold 16px '黑体'">登 录</span></button>
 							</div>

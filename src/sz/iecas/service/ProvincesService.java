@@ -10,5 +10,6 @@ public interface ProvincesService {
 	 * @return 省份列表
 	 */
 	List<Province> getAllProvince();
+	public String getProvinceName(String id);
 
 }

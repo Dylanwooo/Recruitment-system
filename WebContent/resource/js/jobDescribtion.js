@@ -8,8 +8,6 @@
  document.getElementById("label4").style.top = document.getElementById("label2").offsetTop+height2+50+'px';
  document.getElementById("label5").style.top = document.getElementById("label4").offsetTop+40+'px';
  
-
-
  function isExist(userPhone,jobId,type){
 	 var url="resumeInput?id="+jobId+"&type="+type;
 	 $.ajax({
@@ -19,11 +17,36 @@
 		 data : {
 			 phone : userPhone,
 		 },
-		success : function(data,status) {
-			window.location = url;
+		 
+		success : function(info,status) {
+			if(info=="可以申请")
+				{
+				if(confirm('确认申请该岗位？'))
+				window.location = url;
+				}
+			else
+			{
+				if(confirm('确认要转投该岗位？')){
+					$.ajax({
+						type : "POST",
+						dataType : "json",
+						url : "updateresumetable",
+						data : {
+							jobid : jobId,
+							type:type,
+							id:info
+						},
+						success : function(data,status){
+						
+							window.location="resumePreview?id="+data;
+						}
+					})
+					}
+				}
+			
 		},
-		error : function(jqXHR,data,status){
-			alert(jqXHR.responseText);
+		error : function(info,status){
+			alert("已有岗位正在申请中");
 		}
 	 })
  }

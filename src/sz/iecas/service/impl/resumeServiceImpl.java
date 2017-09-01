@@ -14,15 +14,19 @@ import sz.iecas.dao.ProjectExtendMapper;
 import sz.iecas.dao.ResumeTableMapper;
 import sz.iecas.model.EducationExtend;
 import sz.iecas.model.ExperienceExtend;
+import sz.iecas.model.JobInfo;
+import sz.iecas.model.JobInfoWithBLOBs;
 import sz.iecas.model.LanguageExtend;
 import sz.iecas.model.ProjectExtendWithBLOBs;
 import sz.iecas.model.ResumeTable;
 import sz.iecas.model.ResumeTableExample;
+import sz.iecas.service.JobInfoService;
 import sz.iecas.service.resumeService;
 
 @Service
 public class resumeServiceImpl implements resumeService {
-	
+	@Resource
+	JobInfoService jobinfoService;
 	@Resource
 	ResumeTableMapper resumeTableMapper;
 	@Resource
@@ -41,7 +45,7 @@ public class resumeServiceImpl implements resumeService {
 			String projectName2, String time2, String role2, String projectDescription2,
 			String projectName3, String time3, String role3, String projectDescription3,
 			String projectName, String time, String role, String projectDescription,String jobName, int jobType,String majorName,
-			String homeProId,String homeCityId,String schoolProId,String schoolCityId,SimpleDateFormat submitTime,
+			String homePro,String homeCity,String homeArea,String schoolProId,String schoolCityId,SimpleDateFormat submitTime,
 			String startDate2,String graduateDate2,int degree2,String school2,String major2,String rank2,String languageType2,
 			int proficiency2,String experienceDescription2,String schoolProId2,String schoolCityId2,
 			String startDate3,String graduateDate3,int degree3,String school3,String major3,String rank3,String languageType3,
@@ -58,7 +62,7 @@ public class resumeServiceImpl implements resumeService {
 		ProjectExtendWithBLOBs projectExtendWithBLOBs = new ProjectExtendWithBLOBs();
 		ProjectExtendWithBLOBs projectExtendWithBLOBs2 = new ProjectExtendWithBLOBs();
 		ProjectExtendWithBLOBs projectExtendWithBLOBs3 = new ProjectExtendWithBLOBs();
-		SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-DD");
+		SimpleDateFormat dateFormat=new SimpleDateFormat("YYYY-MM-dd");
 		String publishtime=dateFormat.format(new Date());
 		resumeTable.setSubmittime(publishtime);
 		resumeTable.setName(name);
@@ -73,8 +77,11 @@ public class resumeServiceImpl implements resumeService {
 		resumeTable.setJobname(jobName);
 		resumeTable.setJobtype(jobType);
 		resumeTable.setMajorName(majorName);
-		resumeTable.setStatus("1");
+		resumeTable.setStatus("简历投递成功");
 		resumeTable.setHighestdegree(addEdu);
+		resumeTable.setProvince(homePro);
+		resumeTable.setCity(homeCity);
+		resumeTable.setArea(homeArea);
 		resumeTableMapper.insertSelective(resumeTable);
 
 		educationExtend.setStartdate(startDate);
@@ -192,6 +199,23 @@ public class resumeServiceImpl implements resumeService {
 
 		resumeTableMapper.updateByExampleSelective(resumeTable, resumeTableExample);
 
+	}
+
+	@Override
+	public ResumeTable resumeUpdate(int jobid, int resumeid) {
+		ResumeTableExample resumeTableExample=new ResumeTableExample();
+		resumeTableExample.createCriteria().andResumeIdEqualTo(resumeid);
+		ResumeTable resumeTable=new ResumeTable();
+		JobInfoWithBLOBs jobInfo=jobinfoService.getJobInfo(jobid);
+		resumeTable.setJobname(jobInfo.getName());
+		resumeTable.setJobtype(jobInfo.getType());
+		resumeTable.setMajorName(jobInfo.getMajorName());
+		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("YYYY-MM-dd");
+		String submittime=simpleDateFormat.format(new Date());
+		resumeTable.setSubmittime(submittime);
+		resumeTable.setStatus("简历投递成功");
+		resumeTableMapper.updateByExampleSelective(resumeTable, resumeTableExample);
+		return resumeTable;
 	}
 
 }

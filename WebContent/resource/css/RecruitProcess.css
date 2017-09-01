@@ -1,0 +1,35 @@
+@CHARSET "UTF-8";
+
+body{
+	width:100%;
+	height:100%;
+	margin: 0;
+	padding:0;
+}
+#mainContainer{
+	position:relative;
+	top:30px;
+	width:1000px;
+	height:600px;
+	margin: 0 auto;	
+}
+#upperContent{
+	position:relative;
+	left:30px;
+}
+.oTd{
+	text-align:center;
+}
+#downContent p{
+	font:bold 17px '黑体'
+}
+#recruitModal hr{
+	margin-top: 0px !important;
+	
+}
+.oTh, .oTd{
+	text-align:center;
+}
+#scheduleTable td{
+	text-align:center;
+}

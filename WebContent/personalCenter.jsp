@@ -52,8 +52,7 @@
 		    <div style="float:left;">
 		      <span><strong>${user.address}</strong></span>
 		    </div>
-		  </div>
-		  
+		  </div>		  
 		  <div id="five" style="float:left; display:inline; position:absolute; top:140px; left:50px;">
 		   <div style="float:left;">
 		      <span><strong>邮箱：</strong></span>
@@ -77,62 +76,7 @@
 		</div>	
      </div>
   </div>
-  <!-- 修改岗位信息模态框 -->
-	<div class="modal fade" id="upmodifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-      <div class="modal-dialog">
-		<div class="modal-content">
-			<div class="modal-header">
-			  <span style="font:bold 18px '微软雅黑'">岗位信息修改</span>
-			  <button type="button" class="close" data-dismiss="modal"
-					aria-label="Close">
-					<span aria-hidden="true">&times;</span>
-			  </button>
-			</div>
-			<div class="modal-body" style="position:relative; height:500px;">			   
-			    <div style="position:absolute;">
-                  <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>岗位描述</strong></span>
-		        </div>
-		        <div style="position:absolute; top:50px; left:20px;">
-		           <textarea rows="5" cols="70" style="border:1 solid #888888;resize:none;" id="updatejobdesc">${jobinfo.jobDesc}</textarea>
-		        </div>		       
-		        <div id="label2" style="position:absolute; top:160px;">
-		           <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>岗位要求</strong></span>
-		        </div>
-		        <div style="position:absolute; top:190px; left:20px;">
-		           <textarea rows="5" cols="70" style="border:1 solid #888888;resize:none;" id="updatejobrequire">${jobinfo.jobRequire}</textarea>
-		        </div>			        
-		        <div  id="label4" style="position:absolute; top:310px;">
-		           <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>学历要求：</strong></span>    
-		        </div>
-		        <div style="position:absolute; top:315px; left:130px;">
-		           <select style="width:50px;" id="updatedegreerequire">
-	                <option value="本科">本科</option>
-	                <option value="研究生">研究生</option>
-	                <option value="博士">博士</option>
-	              </select>
-		        </div>
-		        <div  id="label5" style="position:absolute; top:350px;">
-		           <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>招聘人数：</strong></span>         
-		        </div>
-			    <div style="position:absolute; top:350px; left:130px;">
-			       <input type="text" class="form-control" placeholder="招聘人数" id="number" style="width:150px;">
-			    </div>
-			    <div  id="label6" style="position:absolute; top:385px;">
-		           <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>截止时间：</strong></span>         
-		        </div>
-			    <div style="position:absolute; top:385px; left:130px;">
-			       <input type="text" class="form-control" placeholder="截止时间" id="time"  style="width:150px;" 
-			       onclick="layui.laydate({elem:this, istime:true, format: 'YYYY-MM-DD'})">
-			    </div>
-			</div>
-			<div class="modal-footer">
-			   <button style="font:bold 16px '微软雅黑'" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
-			   <button style="background-color:#eca614;border:none; font:bold 16px '微软雅黑'" type="button" 
-			   class="btn btn-primary" onclick="updatejobinfo()">提交更改</button>
-			</div> 
-		</div>
-	 </div>     
-   </div>
+
    <!-- 修改用户 -->
 	<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog"
 	aria-labelledby="myModalLabel" aria-hidden="true">
@@ -191,31 +135,34 @@
 			<div class="modal-body">
 			  <table class="table">
 				<thead>
-					<tr>
-						
+					<tr>					
 						<th>职位名称</th>
 						<th>职位类别</th>
 						<th>简历状态</th>		
 						<th>查看简历</th>			
 					</tr>
-				</thead>
-				
-				
+				</thead>			
 				  <tbody>		
 				        <c:if test="${resume!=null}">		
 							<tr>
 								
 								<td>${resume.jobname}</td>
-								<td>${resume.majorName}</td>	
-								<c:if test="${resume.status==1}">
-									<td>已成功投递</td> 
+								<td>${resume.majorName}</td>
+								<c:if test="${resume.status=='通过综合面试' }">
+									<td><span class="glyphicon glyphicon-flag" aria-hidden="true" style="color:#5baffa"></span>等待录用</td>
+								</c:if>	
+								<c:if test="${resume.status=='简历投递成功' }">
+									<td><span class="glyphicon glyphicon-play" aria-hidden="true" style="color:#5baffa"></span>简历筛选中</td>
 								</c:if>
-								<c:if test="${resume.status==2}">
-									<td>已被查看</td> 
+								<c:if test="${resume.status=='通过简历筛选' }">
+									<td><span class="glyphicon glyphicon-forward" aria-hidden="true" style="color:#5baffa"></span>等待专业面试</td>
 								</c:if>
-								<c:if test="${resume.status==3}">
-									<td>通过筛选</td> 
-								</c:if>
+								<c:if test="${resume.status=='通过专业面试' }">
+									<td><span class="glyphicon glyphicon-thumbs-up" aria-hidden="true" style="color:#5baffa"></span>等待综合面试</td>
+								</c:if>	
+								<c:if test="${resume.status=='已储备' }">
+									<td><span class="glyphicon glyphicon-remove" aria-hidden="true" style="color:#FA8072"></span>${resume.status }</td>
+								</c:if>	
 								<td><a href="resumePreview?id=${resume.resumeId}&rolecode=${user.roleCode}">跳转</a></td>
 							</tr>	
 							</c:if>

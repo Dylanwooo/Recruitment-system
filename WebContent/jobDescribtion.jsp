@@ -63,7 +63,7 @@
        </div>
     </div>
 	    <c:if test="${user.roleCode==null}">
-	      <div class="col-md-offset-5 col-md-9 col-sm-offset-4 col-sm-6 col-xs-offset-3 col-xs-5" style="position:absolute; bottom:20px; ">       
+	      <div class="col-md-offset-5  col-sm-offset-4  col-xs-offset-3 " style="position:absolute; bottom:20px; ">       
 	         <a style="">
 	           <button style=" height:40px;width:250px; color:white;background-color:#eca614;
 	              border:none; border-radius:0px;font:bold 18px '黑体'" type="button" class="btn btn-default"

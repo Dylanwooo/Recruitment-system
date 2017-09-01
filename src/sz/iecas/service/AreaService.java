@@ -6,10 +6,11 @@ import sz.iecas.model.Area;
 
 public interface AreaService {
 
-	/**¸ù¾ÝÊ¡·Ýid»ñÈ¡¸ÃÊÐµÄµØÇø
-	 * @param id ³ÇÊÐid
-	 * @return µØÇøÁÐ±í
+	/**ï¿½ï¿½ï¿½ï¿½Ê¡ï¿½ï¿½idï¿½ï¿½È¡ï¿½ï¿½ï¿½ÐµÄµï¿½ï¿½ï¿½
+	 * @param id ï¿½ï¿½ï¿½ï¿½id
+	 * @return ï¿½ï¿½ï¿½ï¿½ï¿½Ð±ï¿½
 	 */
 	List<Area> getAreasByCityId(String id);
+	public String getAreaName(String id);
 
 }

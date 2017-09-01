@@ -1,4 +1,6 @@
 ﻿
+
+
 setTimeout(function(){
 	try{
 		document.getElementById('username').focus();
@@ -25,6 +27,7 @@ function addUser() {
 		}
 		
 	})
+	obj=code=null;
 }
 
 function registeUser() {	
@@ -48,6 +51,7 @@ function registeUser() {
 			alert(jqXHR.responseText);
 		}
 	})
+	
 	//正则验证邮箱
 	var reg = new RegExp("^[a-z0-9]+([._\\-]*[a-z0-9])*@([a-z0-9]+[-a-z0-9]*[a-z0-9]+.){1,63}[a-z0-9]+$");
 	var obj = document.getElementById("email");
@@ -70,6 +74,7 @@ function registeUser() {
 	}
 	else
 		alert("手机号格式错误!");
+	reg=obj=null;
 }
 
 function misRegisteUser() {	

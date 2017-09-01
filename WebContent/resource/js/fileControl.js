@@ -4,7 +4,6 @@
  * 上传控制
  */
 function fileControl(target){
-
 	var name = target.value;
 	var filename = name.substring(name.lastIndexOf(".")+1).toLowerCase();
 	if(filename != "pdf"&&filename != "doc"&&filename != "docx"){
@@ -12,6 +11,8 @@ function fileControl(target){
 		target.value="";
 		return ;
 	}
+	
+	name=filename=null;
 }
 
 /**
@@ -25,6 +26,8 @@ function fake_click(obj){
 			,false,false,false,false,0,null
 			);
 	obj.dispatchEvent(ev);
+	
+	ev=null;
 }
 function export_raw(name,data){
 	var urlObject = window.URL||window.webkitURL||window;
@@ -34,11 +37,15 @@ function export_raw(name,data){
 	save_link.href = urlObject.createObjectURL(export_blob);
 	save_link.download = name;
 	fake_click(save_link);
+	
+	urlObject=export_blob=null;
 }
+
 var test = document.getElementsByTagName('html')[0].outerHTML;
 
 $("#downLoad").click(function(){
 	var name = document.getElementById("name").value;
 	var filename = name + "简历表.html";
 	export_raw(filename,test)
+	name=filename=null;
 })

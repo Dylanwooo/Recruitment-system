@@ -24,5 +24,18 @@ public class ProvincesServiceImpl implements ProvincesService {
 		List<Province> provincesList = provinceMapper.selectByExample(provinceExample);
 		return provincesList;
 	}
+	public String getProvinceName(String id) {
+		ProvinceExample ProvinceExample = new ProvinceExample();
+		ProvinceExample.createCriteria().andProvinceidEqualTo(id);
+		List<Province> ProvinceList = provinceMapper.selectByExample(ProvinceExample);
+		Province Province = new Province();
+		if(ProvinceList.size() == 0){
+			Province = null;
+		}else {
+			Province = ProvinceList.get(0);
+		}
+		return Province.getProvince();
+	}
+
 
 }
