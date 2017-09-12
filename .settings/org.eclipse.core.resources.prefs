@@ -4,7 +4,6 @@
 eclipse.preferences.version=1
 encoding//WebContent/resumeInput.jsp=UTF-8
 encoding//src/config.properties=UTF-8
-encoding//src/sz/iecas/controller/JobInfoController.java=UTF-8
 encoding//src/sz/iecas/controller/ResumeInputController.java=UTF-8
 encoding//src/sz/iecas/controller/UserController.java=UTF-8
 encoding//src/sz/iecas/controller/resumeCenterController.java=UTF-8

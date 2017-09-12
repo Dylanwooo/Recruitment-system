@@ -5,7 +5,7 @@
 <head>
 <jsp:include page="common/common_header.jsp"></jsp:include>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=2.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="${webroot }/resource/css/aboutme.css">
 <jsp:include page="common/common_header.jsp"></jsp:include>
 <title>走进苏研院</title>
