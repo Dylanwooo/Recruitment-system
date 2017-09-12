@@ -37,20 +37,29 @@ public class UserController {
 	UserService userService;
 	@Resource
 	JobInfoService jobinfoservice;
-
+	@Resource ResumeCenterService resumeCenterservice;
+/*
+ * 登录页面
+ */
 	@RequestMapping("/login")
 	public ModelAndView toIndex(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("login");
 		return mav;
 	}
+	/*
+	 * 注册页面
+	 */
 	@RequestMapping("/register")
 	public ModelAndView toRegister(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("RegisterPage");
 		return mav;
 	}
-	@Resource ResumeCenterService resumeCenterservice;
+	
+	/*
+	 * 个人中心
+	 */
 	@RequestMapping("/center")
 	public ModelAndView toCenter(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -74,7 +83,12 @@ public class UserController {
 		mav.addObject("resume",resumeTable);
 		return mav;
 	}
-	
+	/*
+	 * 投递简历时根据用户电话判断是否已有简历，以及简历是否被回绝
+	 * 如果没有简历就可以投递
+	 * 如果回绝就可以转投
+	 * 否则不能申请第二个岗位
+	 */
 	@RequestMapping("/isExist")
 	public ResponseEntity<String> isExist(HttpServletRequest request) {
 		String info = null;
@@ -96,6 +110,9 @@ public class UserController {
 		}
 	}
 	
+	/*
+	 * 更新个人中心用户信息
+	 */
 	@RequestMapping("/updateEmployee")
 	public ResponseEntity<User> toEmployee(HttpServletRequest request) {
 		String id=request.getParameter("id");
@@ -108,6 +125,9 @@ public class UserController {
 		return new ResponseEntity<User>(user,HttpStatus.OK);
 	}
 
+	/*
+	 * 检验登录
+	 */
 	@RequestMapping(value = "/logincheck", method = RequestMethod.POST)
 	public ModelAndView loginCheck(String username, String password, String remember, HttpSession httpSession) {
 		ModelAndView mv = new ModelAndView();
@@ -135,6 +155,9 @@ public class UserController {
 		return mv;
 	}
 
+	/*
+	 * 注册用户，将数据插入数据库
+	 */
 	@RequestMapping(value = "/registeUser", method = RequestMethod.POST)
 	public ResponseEntity<String> registeUser(HttpServletRequest request,HttpSession httpSession) {
 		String username = request.getParameter("username");

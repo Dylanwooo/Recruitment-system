@@ -1,6 +1,9 @@
 package sz.iecas.controller;
 
 import java.text.ParseException;
+/*
+ * 简历输入相关controller
+ */
 import java.text.SimpleDateFormat;
 import java.util.List;
 
@@ -14,12 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import java.io.File;
-
 import sz.iecas.model.JobInfoWithBLOBs;
 import sz.iecas.model.Province;
-import sz.iecas.model.ResumeTable;
-import sz.iecas.model.User;
 import sz.iecas.service.AreaService;
 import sz.iecas.service.CityService;
 import sz.iecas.service.JobInfoService;
@@ -40,6 +39,9 @@ public class ResumeInputController {
 	CityService cityService;
 	@Resource
 	AreaService areaService;
+	/*
+	 * 简历输入页面
+	 */
 	@RequestMapping("/resumeInput")
 	public ModelAndView toIndex(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -57,6 +59,10 @@ public class ResumeInputController {
 		mav.addObject("jobInfo",jobInfoWithBLOBs);
 		return mav;
 	}
+	
+	/*
+	 * 提交简历，向数据库中插入简历记录
+	 */
 	@RequestMapping(value = "/resumeInputer", method = RequestMethod.POST)
 	public ResponseEntity<String> resumeInput(HttpServletRequest request) throws ParseException{		
 		SimpleDateFormat submitTime = new SimpleDateFormat("yyyy-MM-dd");
@@ -289,4 +295,5 @@ public class ResumeInputController {
 			return new ResponseEntity<>(info,HttpStatus.OK);
 		}
 	}
+	
 }

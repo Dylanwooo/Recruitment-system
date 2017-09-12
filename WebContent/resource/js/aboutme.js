@@ -1,7 +1,7 @@
 /**
  * 
  */
-
+//工作环境轮播图
 $(document).ready(function(){
 	$('#circleContent').carousel({
 		interval:1500

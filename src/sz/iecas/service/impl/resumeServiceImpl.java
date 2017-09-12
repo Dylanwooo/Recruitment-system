@@ -202,6 +202,7 @@ public class resumeServiceImpl implements resumeService {
 	}
 
 	@Override
+	//根据jobid 来转投简历
 	public ResumeTable resumeUpdate(int jobid, int resumeid) {
 		ResumeTableExample resumeTableExample=new ResumeTableExample();
 		resumeTableExample.createCriteria().andResumeIdEqualTo(resumeid);

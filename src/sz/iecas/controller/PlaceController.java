@@ -19,7 +19,9 @@ import sz.iecas.model.Province;
 import sz.iecas.service.AreaService;
 import sz.iecas.service.CityService;
 import sz.iecas.service.ProvincesService;
-
+/*
+ * 地区相关控制器
+ */
 @Controller
 public class PlaceController {
 
@@ -30,65 +32,27 @@ public class PlaceController {
 	@Resource
 	AreaService areaService;
 
-	@RequestMapping("/province")
-	public ModelAndView toProvince(HttpServletRequest request) {
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("province");
 
-		mav.addObject("title", "省份列表");
-		List<Province> provinceList = provincesService.getAllProvince();
-		mav.addObject("provinceList", provinceList);
-
-		return mav;
-
+	/*
+	 * 根据省份id获取城市列表
+	 */
+	@RequestMapping("/getCity")
+	public ResponseEntity<List<City>> getCity(HttpServletRequest request){
+		String id = request.getParameter("id");
+		List<City> cityList = cityService.getCitiesByProvinceId(id);
+		return new ResponseEntity<List<City>>(cityList,HttpStatus.OK);
 	}
 
-	@RequestMapping("/city")
-	public ModelAndView toCity(HttpServletRequest request) {
-		String provinceid = request.getParameter("provinceid");
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("city");
-
-		mav.addObject("title", "城市列表");
-		List<City> cityList = cityService.getCitiesByProvinceId(provinceid);
-		mav.addObject("cityList", cityList);
-
-		return mav;
-
-	}
-	
-	@RequestMapping("/area")
-	public ModelAndView toArea(HttpServletRequest request) {
-		String cityid = request.getParameter("cityid");
-
-		ModelAndView mav = new ModelAndView();
-		mav.setViewName("area");
-
-		mav.addObject("title", "地区列表");
-		List<Area> areaList = areaService.getAreasByCityId(cityid);
-		mav.addObject("areaList", areaList);
-
-		return mav;
-
+	/*
+	 * 根据城市id获取地区列表
+	 */
+	@RequestMapping("/getArea")
+	public ResponseEntity<List<Area>> getArea(HttpServletRequest request){
+		String id = request.getParameter("id");
+		List<Area> areaList = areaService.getAreasByCityId(id);
+		return new ResponseEntity<List<Area>>(areaList,HttpStatus.OK);
 	}
 
-	@ResponseBody
-	@RequestMapping(value = "/city_json", method = RequestMethod.GET)
-	public ResponseEntity<List<City>> getCityJson(HttpServletRequest request) throws Exception {
-		String provinceid = request.getParameter("provinceid");
 
-		List<City> cityList = cityService.getCitiesByProvinceId(provinceid);
-
-		return new ResponseEntity<List<City>>(cityList, HttpStatus.OK);
-	}
-	@RequestMapping(value = "/area_json", method = RequestMethod.GET)
-	public ResponseEntity<List<Area>> getAreaJson(HttpServletRequest request) throws Exception {
-		String cityid = request.getParameter("cityid");
-
-		List<Area> areaList = areaService.getAreasByCityId(cityid);
-
-		return new ResponseEntity<List<Area>>(areaList, HttpStatus.OK);
-	}
 
 }

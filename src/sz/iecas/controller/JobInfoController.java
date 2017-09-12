@@ -119,6 +119,7 @@ public class JobInfoController {
 		String jobrequire = request.getParameter("jobrequire");
 		String  degree=request.getParameter("degree");
 		String hot=request.getParameter("hot");
+		String majorName = request.getParameter("majorName");
 		int jobdegree=1;
 		if(degree.equals("研究生"))
 			jobdegree=2;
@@ -126,7 +127,7 @@ public class JobInfoController {
 			jobdegree=3;
 		String number = request.getParameter("number");
 		String endtime=request.getParameter("endtime");
-		JobInfo jobInfo = jobInfoService.updateJobinfoById(Integer.parseInt(id), jobdesc,jobrequire,jobdegree , Integer.parseInt(number),  endtime,Integer.parseInt(hot));
+		JobInfo jobInfo = jobInfoService.updateJobinfoById(Integer.parseInt(id), jobdesc,jobrequire,jobdegree , Integer.parseInt(number),  endtime,Integer.parseInt(hot),majorName);
 		return new ResponseEntity<JobInfo>(jobInfo,HttpStatus.OK);
 	}
 	@RequestMapping("/jobDescribtion")
@@ -231,10 +232,17 @@ public class JobInfoController {
 		return new ResponseEntity<JobInfo>(HttpStatus.OK);
 	}
 	@RequestMapping("/addMajor")
-	public ResponseEntity<Major> addMajor(HttpServletRequest request){
+	public ResponseEntity<String> addMajor(HttpServletRequest request){
 		String name = request.getParameter("majorName");
-		Major major = majorService.addMajor(name);
-		return new ResponseEntity<Major>(major,HttpStatus.OK);
+		String info = "";
+		if(name.equals("")){
+			info = "分类名称不能为空!";
+			return new ResponseEntity<String>(info,HttpStatus.BAD_REQUEST);
+		}
+		else{
+			majorService.addMajor(name);		
+			return new ResponseEntity<String>(info,HttpStatus.OK);
+		}		
 	}
 	@RequestMapping("/deleteMajor")
 	public ResponseEntity<Major> deleteMajor(HttpServletRequest request){

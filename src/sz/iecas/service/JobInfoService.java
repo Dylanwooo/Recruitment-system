@@ -18,7 +18,7 @@ public interface JobInfoService {
 	JobInfoWithBLOBs  updateStatusbytime(String time);
 	
 	
-	JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime,int hot);
+	JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime,int hot,String majorNamne);
 	//通过id删除岗位信息
 	int deleteJobById(int id);
 	JobInfo updateJobStatusById(int id);

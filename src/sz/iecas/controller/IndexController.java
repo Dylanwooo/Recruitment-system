@@ -27,8 +27,7 @@ public class IndexController {
 	@RequestMapping("/index")
 	public ModelAndView toIndex(HttpServletRequest request) {
 		//进入首页更新岗位是否过期
-		String username=request.getParameter("username");
-		HttpSession session=request.getSession();
+	
 		SimpleDateFormat simpleDateFormat=new SimpleDateFormat("YYYY-MM-dd");
 		String date=simpleDateFormat.format(new Date());		
 		  jobInfoService.updateStatusbytime(date);

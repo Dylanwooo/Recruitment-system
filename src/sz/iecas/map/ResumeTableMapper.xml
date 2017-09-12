@@ -146,7 +146,7 @@ left JOIN job_info on resumetable.jobname=job_info.name and resumetable.jobtype=
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    order by resume_id
+    order by resume_id DESC
   </select>
   <select id="selectByExampleWithBLOBs" parameterType="sz.iecas.model.ResumeTableExample" resultMap="ResultMapWithBLOBs">
     <!--

@@ -11,7 +11,7 @@
 </head>
 <body>
   <jsp:include page="common/common_body.jsp"></jsp:include>
-<div style="position:relative; width:100% height:600px;background-color: #f5f7fa;"> 
+<div style="position:relative; top:20px;width:100% height:600px;background-color: #f5f7fa;"> 
   <div id="mainContainer">
      <div id="leftPanel">
        <div style="top:10px;position:absolute;left:25px;">

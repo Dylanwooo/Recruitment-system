@@ -8,12 +8,16 @@ var j = 1;
 var len = 1;
 
 function delEdu(){
-	$('#delEdu').parent().parent().remove();
-	i--;
+	if(confirm('确认删除教育经历？')){
+		$('#delEdu').parent().parent().remove();
+		i--;
+	}	
 }
 function delPro(){
-	$('#delPro').parent().parent().remove();
-	j--;
+	if(confirm('确认删除教育经历？')){
+		$('#delPro').parent().parent().remove();
+		j--;
+	}	
 }
 
 //输入框自动聚焦
@@ -249,15 +253,15 @@ function inputResume(userEmail,userPhoneNumber,jobName,jobType,majorname) {
 			jobName : jobName,
 			type : jobType,
 			majorName : majorname,
-			
-			proficiency0 : $("#proficiency2").val(),
-			
+			proficiency0 : $("#proficiency2").val(),			
 			addEdu : addEdu,
 			addPro : addPro
 		},
 		success : function(data, status) {
-			document.getElementById("upload").submit();
-			alert("提交成功");
+			if(confirm('确认提交吗？')){
+				document.getElementById("upload").submit();
+				alert("提交成功");
+			}		
 		},
 		error : function(jqXHR,data,status){
 			alert(jqXHR.responseText);

@@ -125,7 +125,7 @@
     <if test="_parameter != null">
       <include refid="Example_Where_Clause" />
     </if>
-    order by hot
+    order by hot Desc, publishtime DESC 
   </select>
   <select id="selectByExample" parameterType="sz.iecas.model.JobInfoExample" resultMap="BaseResultMap">
     <!--

@@ -77,6 +77,10 @@ body{
 	float:left;
 	font: bold 15px '微软雅黑';
 }
+#mainContainer #rightContent #nine span{
+	float:left;
+	font: bold 15px '微软雅黑';
+}
 #mainContainer #rightContent #ten span{
 	float:left;
 	font: bold 15px '微软雅黑';
@@ -95,6 +99,12 @@ body{
 	border-radius:0px;
 }
 #mainContainer #rightContent #five button{
+	border-radius:0px;
+}
+#mainContainer #rightContent #nine button{
+	border-radius:0px;
+}
+#mainContainer #rightContent #nine input{
 	border-radius:0px;
 }
 #mainContainer #rightContent #twotwo button{

@@ -26,7 +26,9 @@ import sz.iecas.service.ExperienceExtendService;
 import sz.iecas.service.ProjectExtendService;
 import sz.iecas.service.UserService;
 import sz.iecas.service.resumeService;
-
+/*
+ * 简历预览
+ */
 @Controller
 public class resumePreviewController {
 	@Resource
@@ -39,7 +41,10 @@ public class resumePreviewController {
 	ProjectExtendService projectExtendService;
 	@Resource
 	UserService userservice;
-
+/*
+ * 从数据库读取简历信息
+ * 根据用户角色以及是否有上传附件显示不同的底部
+ */
 	@RequestMapping("/resumePreview")
 	public ModelAndView topreview(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
@@ -72,6 +77,9 @@ public class resumePreviewController {
 		mav.addObject("projectExtend",projectExtendWithBLOBs);
 		return mav;
 	}
+	/*
+	 * 根据jobid 和resumeid 来转投简历
+	 */
 	@RequestMapping("/updateresumetable")
 
 	public ResponseEntity<Integer> updateresume(HttpServletRequest request) {
@@ -84,6 +92,10 @@ public class resumePreviewController {
 		
 		
 	}
+	
+	/*
+	 * 根据角色 让这份简历通过不同的状态
+	 */
 	
 	@RequestMapping("/pass")
 	public ResponseEntity<String> isPass(HttpServletRequest request) {
@@ -113,6 +125,9 @@ public class resumePreviewController {
 		
 		
 	}
+	/*
+	 * 回绝这份简历
+	 */
 	@RequestMapping("/deny")
 	public ResponseEntity<String> isdeny(HttpServletRequest request) {
 		String info="已储备";
@@ -122,6 +137,10 @@ public class resumePreviewController {
 		
 		
 	}
+	
+	/*
+	 * 下载简历
+	 */
 	@RequestMapping("/download_successful")
 	public ResponseEntity<byte[]> getdownloadpath(HttpServletRequest request)throws IOException{
 		String downloadpath = request.getParameter("workplace");

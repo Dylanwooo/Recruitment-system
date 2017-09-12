@@ -28,7 +28,9 @@ import sz.iecas.service.ProjectExtendService;
 import sz.iecas.service.ResumeCenterService;
 import sz.iecas.service.UserService;
 import sz.iecas.service.resumeService;
-
+/*
+ *  上传简历相关控制器
+ */
 @Controller
 public class FileUploadController {
 	@Resource
@@ -43,6 +45,11 @@ public class FileUploadController {
 	ProjectExtendService projectExtendService;
 	String path;
 	@RequestMapping("fileUpload")
+	/*
+	 * 获取到上传的文件，按照系统时间为每个文件命名，将路径保存到数据库中
+	 * 默认保存在服务器的E盘下面的download文件夹中，请在E盘下新建该文件夹
+	 * 保存完简历后，返回预览简历的界面
+	 */
 	public ModelAndView topersonal(@RequestParam("file") CommonsMultipartFile file,
 		HttpServletRequest request)throws IOException{
 		ModelAndView mav = new ModelAndView();

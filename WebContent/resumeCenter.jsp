@@ -33,25 +33,8 @@
 	            <div class="col-md-1">
 	            	<a href="resumeCenter"> <span class="glyphicon glyphicon-repeat" aria-hidden="true"></span></a>	
 	            </div>   	                                                 
-	      </div>   
-	      <div id="oneOne" class="col-md-6 col-sm-6 col-xs-6" style="position:relative;float:left; display:inline;padding-top:15px;">
-	             <span ><strong>部门：</strong></span>
-	             <c:forEach items="${departmentList }" var="departmentList">
-	              <span style="padding-right:8px;"><a onclick="select('${sex}','${departmentList.id} }','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','${status}')">${departmentList.name}</a></span>  
-	             </c:forEach>
-	              	                     
-	      </div>
-	      <div id="five" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;">
-             <span><strong>学校搜索：</strong></span>
-             <div class="col-md-4 col-sm-3 col-xs-2" style="float:left; position:relative;">
-			       <input style="width:180px;" id="searchSchool" type="text" class="form-control" value="${search}">   		  	                	      
-			 </div>	
-		     <div class="col-md-4 col-sm-3 col-xs-2" style="float:left; position:relative;">
-		       <button style="background-color:black;width:70px;"type="button" class="btn btn-primary" 
-		       onclick="searchSchool('${sex}','${department}','${major}','${type}','${degree}','${start}','${end}','${searchjob }','${status}')">搜索  </button>
-		     </div>		     
-          </div>
-          <div id="two" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left; display:inline;padding-top:15px;">
+	      </div>  
+	      <div id="two" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left; display:inline;padding-top:15px;height:auto;">
 	             <span ><strong>专业类别：</strong></span>	             
 	             <div class="col-md-4" style="float:left; position:absolute;width:500px;margin-left:20px;">
 	                <ul>
@@ -63,15 +46,21 @@
 					   </c:forEach>	
 	                </ul>	
 	             </div>           
-	       </div>
-	       <div id="twotwo" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;">
-             <span><strong>岗位搜索：</strong></span>
+	       </div> 
+	     <%--  <div id="oneOne" class="col-md-6 col-sm-6 col-xs-6" style="position:relative;float:left; display:inline;padding-top:15px;">
+	             <span ><strong>部门：</strong></span>
+	             <c:forEach items="${departmentList }" var="departmentList">
+	              <span style="padding-right:8px;"><a onclick="select('${sex}','${departmentList.id} }','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','${status}')">${departmentList.name}</a></span>  
+	             </c:forEach>	              	                     
+	      </div> --%>
+	      <div id="five" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;">
+             <span><strong>学校搜索：</strong></span>
              <div class="col-md-4 col-sm-3 col-xs-2" style="float:left; position:relative;">
-			      <input style="width:180px;" id="searchJob" type="text" class="form-control" value="${searchjob}">   		  	                	      
+			       <input style="width:180px;" id="searchSchool" type="text" class="form-control" value="${search}">   		  	                	      
 			 </div>	
 		     <div class="col-md-4 col-sm-3 col-xs-2" style="float:left; position:relative;">
 		       <button style="background-color:black;width:70px;"type="button" class="btn btn-primary" 
-		        onclick="searchJob('${sex}','${department}','${major}','${type}','${degree}','${start}','${end}','${search }','${status}')">搜索  </button>
+		       onclick="searchSchool('${sex}','${department}','${major}','${type}','${degree}','${start}','${end}','${searchjob }','${status}')">搜索  </button>
 		     </div>		     
           </div>
           <div id="three" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline;padding-top:15px;">
@@ -86,6 +75,28 @@
                 <span><a onclick="select('${sex}','${department}','${major}','3','${degree}','${search}','${start}','${end}','${searchjob }','${status}')">实习生招聘</a></span>
              </div>
 	       </div>
+	       <div id="twotwo" class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;padding-left:15px;">
+             <span><strong>岗位搜索：</strong></span>
+             <div class="col-md-2" style="float:left; position:relative;">
+			      <input style="width:180px;" id="searchJob" type="text" class="form-control" value="${searchjob}">   		  	                	      
+			 </div>	
+		     <div style="float:left; position:relative;left:127px;">
+		       <button style="background-color:black;width:70px;"type="button" class="btn btn-primary" 
+		        onclick="searchJob('${sex}','${department}','${major}','${type}','${degree}','${start}','${end}','${search }','${status}')">搜索  </button>
+		     </div>		     
+          </div>
+          <div id="four"class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;">
+	             <span><strong>最高学历：</strong></span>	            
+	             <div style="float:left; position:relative;padding-right:20px;">
+	                <span><a onclick="select('${sex}','${department}','${major}','${type}','1','${search}','${start}','${end}','${searchjob }','${status}')">本科</a></span>
+	             </div>
+	             <div style="float:left; position:relative;padding-right:20px;">
+	                <span><a onclick="select('${sex}','${department}','${major}','${type}','2','${search}','${start}','${end}','${searchjob }','${status}')">研究生</a></span>
+	             </div>
+	             <div style="float:left; position:relative;">
+	                <span><a onclick="select('${sex}','${department}','${major}','${type}','3','${search}','${start}','${end}','${searchjob }','${status}')">博士</a></span>
+	             </div>            
+          </div>
 	       <div id="six" class="col-md-6 col-sm-6 col-xs-6" style="position:relative;float:left;display:inline; padding-top:15px;">
              <span><strong>时间搜索：</strong></span>
              <div class="col-md-4 col-sm-4 col-xs-4" style="float:left; position:relative;margin-right:-20px;margin-left:-5px;">
@@ -102,18 +113,7 @@
 		       onclick="searchtime('${sex}','${department}','${major}','${type}','${degree}','${search}','${searchjob }','${status}')">搜索  </button>
 		     </div>	
           </div>
-          <div id="four"class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;">
-	             <span><strong>最高学历：</strong></span>	            
-	             <div style="float:left; position:relative;padding-right:20px;">
-	                <span><a onclick="select('${sex}','${department}','${major}','${type}','1','${search}','${start}','${end}','${searchjob }','${status}')">本科</a></span>
-	             </div>
-	             <div style="float:left; position:relative;padding-right:20px;">
-	                <span><a onclick="select('${sex}','${department}','${major}','${type}','2','${search}','${start}','${end}','${searchjob }','${status}')">研究生</a></span>
-	             </div>
-	             <div style="float:left; position:relative;">
-	                <span><a onclick="select('${sex}','${department}','${major}','${type}','3','${search}','${start}','${end}','${searchjob }','${status}')">博士</a></span>
-	             </div>            
-          </div> 
+           
           <div id="ten"class="col-md-6 col-sm-6 col-xs-6" style="position:relative; float:left;display:inline; padding-top:15px;padding-right:0;">
           		<span><strong>简历状态：</strong></span>
           		<c:if test="${user.roleCode=='hr'}">
@@ -130,7 +130,7 @@
           				<span><a onclick="select('${sex}','${department}','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','通过综合面试')">通过综合面试</a></span>
           			</div>	
           			<div style="float:left; position:relative;padding-right:15px;padding-right:0">
-          				<span><a onclick="select('${sex}','${department}','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','已回绝')">已回绝</a></span>
+          				<span><a onclick="select('${sex}','${department}','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','已储备')">已储备</a></span>
           			</div>
           		</c:if>
           		<c:if test="${user.roleCode=='interviewer'}">
@@ -141,11 +141,21 @@
           				<span><a onclick="select('${sex}','${department}','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','通过专业面试')">通过专业面试</a></span>
           			</div>
           			<div style="float:left; position:relative;padding-right:20px;">
-          				<span><a onclick="select('${sex}','${department}','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','已回绝')">已回绝</a></span>
+          				<span><a onclick="select('${sex}','${department}','${major}','${type}','${degree}','${search}','${start}','${end}','${searchjob }','已储备')">已储备</a></span>
           			</div>
           		</c:if>
           		         
-          </div>                             	                                     
+          </div>  
+          <div id="nine" class="col-md-6 col-sm-6 col-xs-6" style="position:relative;float:left;display:inline; padding-top:15px;">
+             <span><strong>部门搜索：</strong></span>
+             <div class="col-md-4 col-sm-4 col-xs-4" style="float:left; position:relative;margin-right:-20px;margin-left:-5px;">
+			       <input id="department" style="width:120px;"  type="text" class="form-control" value="${department}" >   		  	                	      
+			 </div>					
+		     <div style="float:left; position:relative;">
+		       <button style="background-color:black;width:70px;"type="button" class="btn btn-primary" 
+		       onclick="searchdepartment('${sex}','${major}','${type}','${degree}','${search}','${searchjob }','${start}','${end}','${status}')">搜索  </button>
+		     </div>	
+          </div>                           	                                     
         </div>
 
         <div class="col-md-12 col-sm-10 col-xs-9" style="position:relative; top:300px; height:450px;background-color:white;padding-top:10px;box-shadow:0 0 1px #c0c0c0; ">			   

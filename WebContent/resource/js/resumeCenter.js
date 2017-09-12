@@ -12,6 +12,12 @@ function searchJob(sex,department,major,type,degree,start,end,school,status){
 	  window.location=url;
 	  searchjob=url=null;
 	}
+function searchdepartment(sex,major,type,degree,start,end,school,job,status){		
+	  var searchdepartment=$("#department").val();
+	  var url="resumeCenter?start="+start+"&end="+end+"&search="+school+"&degree="+degree+"&type="+type+"&major="+major+"&department="+searchdepartment+"&sex="+sex+"&job="+job+"&status="+status;
+	  window.location=url;
+	  searchjob=url=null;
+	}
 function select(sex,department,major,type,degree,search,start,end,job,status){	 	  
 	  var url="resumeCenter?start="+start+"&end="+end+"&search="+search+"&degree="+degree+"&type="+type+"&major="+major+"&department="+department+"&sex="+sex+"&job="+job+"&status="+status;
 	  window.location=url;

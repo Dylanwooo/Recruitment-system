@@ -29,7 +29,7 @@
 		          		<button class="btn btn-default" type="button"><span class="glyphicon glyphicon-send"></span>
 		          		招聘流程</button></a>	
 		          </c:if>
-		          <button class="btn btn-default" type="button"><span class="glyphicon glyphicon-comment"></span>常见问题</button>
+		          <button class="btn btn-default" type="button"data-toggle="modal" data-target="#questionsModal"><span class="glyphicon glyphicon-comment"></span>常见问题</button>
 	           </div>
 		    </div>
 		<div class="col-md-9  col-sm-8 col-xs-8" id="jobInfoContainer">
@@ -44,6 +44,7 @@
 			   <div class="col-md-12 col-sm-10 col-xs-8" style="padding-top:10px;">
 			      <ul id="test" class="nav nav-tabs" role="navigation">	
 					  <li role="presentation"><a href="jobinfo?type=${jobtype}">全部分类</a></li>
+					  <li class="divider"></li>
 					  <c:forEach items="${majorList }" var="majorList">
 					  <li role="presentation">
 							<a href="jobinfo?major=${majorList.majorName }&type=${jobtype}">${majorList.majorName }</a>
@@ -61,7 +62,7 @@
 			   </div>	
 			    <c:if test="${user.roleCode=='hr'}">
 			      <div class="col-md-12 col-xs-12" style="padding-top:10px;">
-				      <ul class="nav nav-tabs">	
+				      <ul id="test2" class="nav nav-tabs">	
 				          <li role="presentation"><a href="jobinfo?type=${jobtype}&status=1">已发布岗位</a></li>
 						  <li role="presentation"><a href="jobinfo?type=${jobtype}&status=2">暂存岗位</a></li>
 						  <li role="presentation"><a href="jobinfo?type=${jobtype}&status=4">已过期岗位</a></li>
@@ -110,14 +111,47 @@
 								<td class="oTd"><a href="jobDescribtion?id=${jobinfo.id}">${jobinfo.name }</a></td>								
 								<td class="oTd">${jobinfo.num }</td>							
 								<c:if test="${jobinfo.departmentid==1}">
-								   <td class="oTd">21室</td>
+								   <td id="tdvalue" class="oTd">地理空间信息系统研究室</td>
 								</c:if>
 								<c:if test="${jobinfo.departmentid==2}">
-								   <td class="oTd">22室</td>
+								   <td id="tdvalue" class="oTd">空间信息智能处理系统研究室</td>
 								</c:if>			
 								<c:if test="${jobinfo.departmentid==3}">
-								   <td class="oTd">人事处</td>
-								</c:if>				
+								   <td id="tdvalue" class="oTd">人事处</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==4}">
+								   <td id="tdvalue" class="oTd">综合管理部</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==5}">
+								   <td id="tdvalue" class="oTd">综合办公室</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==6}">
+								   <td id="tdvalue" class="oTd">科技处</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==7}">
+								   <td id="tdvalue" class="oTd">航天项目管理办公室</td>
+								</c:if>
+								<c:if test="${jobinfo.departmentid==8}">
+								   <td id="tdvalue" class="oTd">科技融合管理办公室</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==9}">
+								   <td id="tdvalue" class="oTd">财务处</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==10}">
+								   <td id="tdvalue" class="oTd">质量处</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==11}">
+								   <td id="tdvalue" class="oTd">物资与条件处</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==12}">
+								   <td id="tdvalue" class="oTd">园区管理与建设处</td>
+								</c:if>	
+								<c:if test="${jobinfo.departmentid==13}">
+								   <td id="tdvalue" class="oTd">保密办公室</td>
+								</c:if>		
+								<c:if test="${jobinfo.departmentid==14}">
+								   <td id="tdvalue" class="oTd">航空遥感管理办公室</td>
+								</c:if>
 								<c:if test="${user.roleCode=='hr'}">
 								  <td class="oTd">
 								  <button class="btn btn-link" type="button" data-toggle="modal" data-target="#modifyModal"
@@ -126,7 +160,11 @@
 								  data-jobrequire='${jobinfo.jobRequire }'
 								  data-num='${jobinfo.num }'
 								  data-time='${jobinfo.endtime }'
-								  data-hot='${jobinfo.hot }'><span class="glyphicon glyphicon-edit" style="color:black"></span></button></td>			
+								  data-hot='${jobinfo.hot }'
+								  data-major='${jobinfo.majorName }'
+								 
+								 >
+								  <span class="glyphicon glyphicon-edit" style="color:black"></span></button></td>			
 								  <td class="oTd">
 								  <c:if test="${jobinfo.jobStatus!=3}">
 								  <button class="btn btn-link" type="button" data-toggle="modal" onclick = "deleteJob('${jobinfo.id}',this)"><span class="glyphicon glyphicon-trash" aria-hidden="true"></span>
@@ -145,7 +183,7 @@
 				</table>
 		   </div>		 		 
 	</div>
-	<!-- 修改岗位信息模态框 -->
+<!-- 修改岗位信息模态框 -->
 	<div class="modal fade" id="modifyModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
       <div class="modal-dialog">
 		<div class="modal-content">
@@ -156,7 +194,7 @@
 					<span aria-hidden="true">&times;</span>
 			  </button>
 			</div>
-			<div class="modal-body" style="position:relative; height:500px;">			   
+			<div class="modal-body" style="position:relative; height:520px;">			   
 			    <div style="position:relative;">
                   <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>岗位描述</strong></span>
 		        </div>
@@ -177,11 +215,11 @@
 		                <option value="研究生">研究生及以上</option>
 		                <option value="博士">博士及以上</option>
 	               </select> 
-	               &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
+	               &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp 
 	               <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>专业类别：</strong></span>
-	               <select onchange="select('${sex}','${department}',$('#option').text(),'${type}','${degree}','${search}','${start}','${end}','${searchjob }','${status}')">				  
+	               <select id="updateMajorName" >				  
 					  <c:forEach items="${majorList }" var="majorList">					  							   
-					   		<option id="option">${majorList.majorName }</option>  				     						   
+					   		<option value="${majorList.majorName }" id="option">${majorList.majorName }</option>  				     						   
 					  </c:forEach>
 				 	</select>
 		        </div>
@@ -190,8 +228,9 @@
 		           <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>招聘人数：</strong></span>         	                      
 		        </div>
 			    <div style="position:relative; left:130px;margin-top:-25px;">
-			       <input type="text" class="form-control" placeholder="招聘人数" id="number" style="width:150px;"> 
-			    </div>
+			       <input type="text" class="form-control" placeholder="招聘人数" id="number" style="width:150px;">			        
+			    </div>	
+			   	
 			    <div  id="label6" style="position:relative;padding-top:5px;">
 		           <span class="glyphicon glyphicon-play" aria-hidden="true" style="color:black; font-size:20px;"></span> <span style="font-size:18px;"><strong>截止时间：</strong></span>         
 		        </div>
@@ -205,6 +244,7 @@
 			    <div style="position:relative; left:130px;margin-top:-25px;">
 			       <input type="text" class="form-control" placeholder="输入1-5之间的数" id="heat"  style="width:150px;">
 			    </div>
+
 			</div>
 			<div class="modal-footer">
 			   <button style="border-radius:0px;font-family:'微软雅黑'" type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -336,19 +376,16 @@
 					</button>
 					<h4 class="modal-title" id="myModalLabel" style="font:bold 18px '微软雅黑'">增加专业</h4>
 				</div>
-				<div class="modal-body">
-					<form id="updateUserForm">
-						<div class="form-group">
-							<label for="majorName" style="font:bold 17px '微软雅黑'">专业名</label>
-							<input style="border-radius:0px;"type="text" class="form-control" id="addMajor" placeholder="输入专业名">
-						</div>
-					</form>
+				<div class="modal-body">				
+					<div class="form-group">
+						<label for="majorName" style="font:bold 17px '微软雅黑'">专业名</label>
+						<input style="border-radius:0px;"type="text" class="form-control" id="addMajor" placeholder="输入专业名">
+					</div>				
 				</div>
 				<div class="modal-footer">
 				    <button style="background-color:#eca614;border:none;border-radius:0px;width:80px;font-family:'微软雅黑'" 
 				    type="button" class="btn btn-primary" onclick="addMajor()">确定</button>
-					<button style="border-radius:0px;width:80px;font-family:'微软雅黑'"type="button" class="btn btn-default" data-dismiss="modal">取消</button>
-					
+					<button style="border-radius:0px;width:80px;font-family:'微软雅黑'"type="button" class="btn btn-default" data-dismiss="modal">取消</button>					
 				</div>
 			</div>
 		</div>
@@ -431,6 +468,26 @@
 						</div>								
 					</div>				
 														
+			</div>
+		</div>  
+    </div> 
+    <!-- 常见问题模态框 
+    	 使用localStorage缓存就好，不需要存入数据库
+    -->
+    <div class="modal fade" id="questionsModal" tabindex="-1" role="dialog"
+		aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" style="width:600px;">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+					<h4 class="modal-title" id="myModalLabel" style="font:bold 18px '微软雅黑'">常见问题</h4>
+				</div>	
+				<div class="modal-body">						
+														
+				</div>																		
 			</div>
 		</div>  
     </div> 

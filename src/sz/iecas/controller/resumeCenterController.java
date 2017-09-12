@@ -1,22 +1,20 @@
 package sz.iecas.controller;
 
 import java.util.List;
+/*
+ * 简历中心相关controller
+ */
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import org.apache.ibatis.jdbc.Null;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
-
 import sz.iecas.model.DepartmentInfo;
-import sz.iecas.model.JobInfo;
 import sz.iecas.model.Major;
 import sz.iecas.model.ResumeTable;
 import sz.iecas.model.User;
@@ -25,7 +23,6 @@ import sz.iecas.service.EducationExtendService;
 import sz.iecas.service.JobInfoService;
 import sz.iecas.service.MajorService;
 import sz.iecas.service.ResumeCenterService;
-import sz.iecas.service.impl.DepartmentServiceImpl;
 
 @Controller
 public class resumeCenterController {
@@ -38,7 +35,12 @@ public class resumeCenterController {
 	@Resource 
 	DepartmentSerivce departmentservice;
 	@Resource EducationExtendService educationExtendService;
+	
+	/*
+	 * 根据参数不同返回不同的简历list
+	 */
 	@RequestMapping("/resumeCenter")
+	
 	public ModelAndView toSelectResume(HttpServletRequest request) {
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("resumeCenter");
@@ -86,7 +88,9 @@ public class resumeCenterController {
 	}
 	
 
-	
+	/*
+	 * 删除简历
+	 */
 	@RequestMapping(value = "/deleteResume")
 	public ResponseEntity<User> deleteResume(HttpServletRequest request) {
 		String idStr = request.getParameter("id");

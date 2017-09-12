@@ -8,7 +8,7 @@
 		<footer class="footer bs-docs-footer">
 			<div class="container">
 				<div class="text-center">
-					<br /> @2017 中科院电子所苏州研究院<br /> 技术支持：数据应用组 <br />
+					<br /> @2017 中科院电子所苏州研究院<br /> 地址：苏州市金鸡湖大道99号苏州纳米城<br />电话：010-62554605<br />
 				</div>
 			</div>
 		</footer>

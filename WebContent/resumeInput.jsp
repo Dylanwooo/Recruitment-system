@@ -142,9 +142,9 @@
 			     <div class="panel-heading" role="tab" id="headingTwo" style="background-color:#f5f7fa">
 			        <h4 class="panel-title">
 			          <a class="collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
-			                            教育背景
+			                            教育背景(从本科开始)
 			          </a>
-			          <button class="btn btn-default"type="button" style="position:relative;left:500px;" id="addEduButton1" >
+			          <button class="btn btn-default"type="button" style="position:relative;left:410px;" id="addEduButton1" >
 			             <span class="glyphicon glyphicon-plus">添加教育背景</span>
 			          </button>
 			        </h4>
@@ -219,7 +219,7 @@
 					            <select>
 						            <option>前10%</option>
 						            <option>前20%</option>
-						            <option>前50%</option>
+						            <option>其他</option>
 					            </select>
 				            </div> 				         
 			            </div>

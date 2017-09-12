@@ -7,6 +7,7 @@ body{
 }
 #mainContainer{
 	width:800px;
+	top:50px;
 	height:600px;
 	margin: 0 auto;
 	position:relative;

@@ -14,7 +14,7 @@
 	<jsp:include page="common/common_body.jsp"></jsp:include>
 	<div id="outsideContent">
 	<div id="mainContainer">
-	    <span style=" font-family:'微软雅黑'">请开始你的表演</span>
+	    <span style=" padding-bottom:10px;font-family:'黑体'">请输入您的意见：</span>
 		<textarea id="inputContent" style="height:200px;width:620px;box-shadow:0 0 3px #000; resize:none;" ></textarea>	
 		<div class="col-md-offset-4 col-sm-offset-4 col-xs-offset-4" style="padding-top:20px;">
 			<button style="width:200px" class="layui-btn" onclick="onUpload()">提交</button>

@@ -10,7 +10,17 @@ $table.bootstrapTable({
 	search: false,
 	clickToSelect: true,		
 });
+$('#addMajor').bind('keypress',function(e){
+	if(e.keyCode==13){
+		addMajor();
+	}
+})
 
+$('#searchJob').bind('keypress',function(e){
+	if(e.keyCode==13){
+		searchjob(type);
+	}
+})
 
 function selectmajor(major,type)
 {
@@ -41,6 +51,7 @@ function searchjob(type){
   search=url=null;
 }
 
+
 function updatejobinfo() {	
 	$.ajax({
 		type : "POST",
@@ -53,7 +64,8 @@ function updatejobinfo() {
 			degree : $("#updatedegreerequire").val(),
 			number: $("#number").val(),
 			endtime:$("#time").val(),	
-			hot:$("#heat").val()
+			hot:$("#heat").val(),
+			majorName:$("#updateMajorName").val()
 		},		
 		success : function(data,status) {
 			alert("修改成功");
@@ -63,6 +75,7 @@ function updatejobinfo() {
 }
 
 var tempid
+
 $('#modifyModal').on('show.bs.modal', function (event) {
 	var button = $(event.relatedTarget) 
 	var jobDesc = button.data('jobdesc') 
@@ -71,12 +84,14 @@ $('#modifyModal').on('show.bs.modal', function (event) {
 	var time=button.data('time')
 	var heat=button.data('hot')
 	var id=button.data('id')
+	var major=button.data('major')
 	var modal = $(this)
 	modal.find('.modal-body #updatejobdesc').val(jobDesc)
 	modal.find('.modal-body #updatejobrequire').val(jobRequire)
 	modal.find('.modal-body #number').val(num)
 	modal.find('.modal-body #time').val(time)
 	modal.find('.modal-body #heat').val(heat)
+	modal.find('.modal-body #updateMajorName').val(major)
 	tempid=id	
 	//解除引用
 	button=jobDesc=jobRequire=num=time=id=null;
@@ -153,8 +168,7 @@ function deleteJob(id,ele){
 	
 }
 /*彻底删除岗位*/
-function deletehrJob(id,ele){
-	
+function deletehrJob(id,ele){	
 	var msg = "确定要彻底删除岗位吗？"
 		if(confirm(msg)==true){
 	$.ajax({
@@ -176,9 +190,12 @@ function addMajor(){
 		data : {
 			majorName : $("#addMajor").val(),
 		},
-		success : function(){
-			alert("添加成功!");
-			window.location.reload();
+		success : function(){		
+				alert("添加成功!");
+				window.location.reload();						
+		},
+		error: function(jqXHR,data,status){
+			alert(jqXHR.responseText);
 		}
 	})
 }
@@ -201,9 +218,6 @@ var msg = "确定要删除此专业吗？同时删除的还有此专业下的岗
 	}
 }
 
-$(document).ready(function(){
-	
-})
 
 
 

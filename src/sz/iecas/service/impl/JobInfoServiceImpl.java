@@ -100,7 +100,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 		return job;
 	}
 	@Override
-	public JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime,int hot) {
+	public JobInfoWithBLOBs updateJobinfoById(int id,String jobdesc,String jobrequire,int degree,int number,String endtime,int hot,String majorName) {
 		JobInfoExample jobInfoExample=new JobInfoExample();
 		jobInfoExample.createCriteria().andIdEqualTo(id);
 		JobInfoWithBLOBs job=new JobInfoWithBLOBs();
@@ -111,6 +111,7 @@ public class JobInfoServiceImpl implements JobInfoService {
 		job.setNum(number);
 		job.setJobStatus(1);
 		job.sethot(hot);
+		job.setMajorName(majorName);
 		jobInfoMapper.updateByExampleSelective(job, jobInfoExample);
 		return job;
 	}
@@ -127,15 +128,15 @@ public class JobInfoServiceImpl implements JobInfoService {
 		for(int i=0;i<jobinfoList.size();i++)
 		{
 			String endtime=jobinfoList.get(i).getEndtime().replaceAll("-", "");
+		
 			if(Integer.parseInt(endtime)<Integer.parseInt(now))
 			{
-				JobInfoWithBLOBs job=new JobInfoWithBLOBs();
-				job.setJobStatus(4);
-				jobInfoMapper.updateByPrimaryKeySelective(job);
+				
+				jobinfoList.get(i).setJobStatus(4);
+				jobInfoMapper.updateByPrimaryKeySelective(jobinfoList.get(i));
 			}
 			
-			
-			
+
 		}
 		return null;
 	}

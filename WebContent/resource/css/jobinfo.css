@@ -46,12 +46,12 @@ body{
 	text-align:center;
 }
 #jobInfoContainer ul li a{
-	font:bold 16px'黑体';
+	font:bold 15px'黑体';
 	color:black;
 }
 #jobHolder #jobInfoTable tbody tr td{
-	font:bold 16px'黑体';
-	color:#053e91;
+	font-family:'微软雅黑';
+	color:black;
 }
 #mainContainer #buttonPanel button{
 	height:60px;
@@ -76,10 +76,8 @@ body{
 }
 #modifyModal .modal-body input{
 	border-radius:0;
-<<<<<<< HEAD
 }
 #publishModal .modal-body input{
 	border-radius:0;
-=======
->>>>>>> 901815fd2886f9f5858d724566e563667828eb1f
+
 }

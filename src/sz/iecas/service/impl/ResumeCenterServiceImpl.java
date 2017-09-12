@@ -12,6 +12,8 @@ import sz.iecas.dao.ExperienceExtendMapper;
 import sz.iecas.dao.LanguageExtendMapper;
 import sz.iecas.dao.ProjectExtendMapper;
 import sz.iecas.dao.ResumeTableMapper;
+import sz.iecas.model.DepartmentInfo;
+import sz.iecas.model.DepartmentInfoExample;
 import sz.iecas.model.EducationExtendExample;
 import sz.iecas.model.ExperienceExtendExample;
 import sz.iecas.model.LanguageExtendExample;
@@ -130,9 +132,22 @@ ProjectExtendMapper projectExtendMapper;
 		return 0;
 	}
 	@Override
+
 	public List<ResumeTable> getResumebyall(String sex, String majorname, String type, String degree, String search,
 			String department, String start, String end,String job,String Status) 
 	{
+		DepartmentInfoExample departmentInfoExample=new DepartmentInfoExample();
+		int departmentid=0;
+		if(department!=null&&department.length()>0)
+		{departmentInfoExample.createCriteria().andNameLike("%"+department+"%");
+		List<DepartmentInfo > departmentInfos=departmentInfoMapper.selectByExample(departmentInfoExample);
+		
+		if(departmentInfos!=null&&departmentInfos.size()>0)
+			System.out.println("部门数量"+departmentInfos.size());
+			departmentid=departmentInfos.get(0).getDepartmentid();
+		}
+		System.out.println("部门号"+departmentid);
+		
 		ResumeTableExample resumeTableExample=new ResumeTableExample();
 		Criteria criteria=resumeTableExample.createCriteria();
 		if(sex!=null&&sex.length()>0) criteria.andSexEqualTo(sex);
@@ -140,7 +155,7 @@ ProjectExtendMapper projectExtendMapper;
 		if(type!=null&&type.length()>0) criteria.andJobtypeEqualTo(Integer.parseInt(type) );
 		if(degree!=null&&degree.length()>0)  criteria.andHighestdegreeEqualTo(Integer.parseInt(degree));
 		if(search!=null&&search.length()>0) criteria.andschoolLike("%"+search+"%");
-		if(department!=null&&department.length()>0) criteria.anddepartmentidEqualTo(Integer.parseInt(department));
+		if(departmentid!=0) criteria.anddepartmentidEqualTo(departmentid);
 		if(job!=null&&job.length()>0) criteria.andJobnameLike("%"+job+"%");
 		if(Status!=null&&Status.length()>0) criteria.andStatusEqualTo(Status);
 		List<ResumeTable> resumeList=resumeTableMapper.selectmyresume(resumeTableExample);
